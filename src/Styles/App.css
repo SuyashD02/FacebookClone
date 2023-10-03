@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/*Login Page*/
+
+.login-Form {
+  font-family: sans-serif;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(219, 218, 218);
+  padding: 7.85em;
+}
+@media only screen and (max-width: 900px){.login-Form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+}
+@media only screen and (max-width: 1075px){.login-Form {
+    height: 39.45em;
+    width: 100%;
+}
+}
+@media only screen and (max-width: 900px)
+{
+  .login-left{
+    padding: 0;
+}}
+@media only screen and (max-width: 1075px)
+{.login-left {
+    font-size: 24px;
+    
+    
+    
+}}
+.login-left {
+  margin: 100px 0px 0px 80px;
+  width: 18em;
+}
+.login-right {
+  margin: 70px;
+}
+#login-Heading{
+  color: rgb(55, 55, 246);
+  text-align: left;
+  
+}
+#login-para{
+  text-align: left;
+}
+.input-Form{
+  height: 16.5em;
+  background-color: white;
+  width: 20em;
+  border-radius: 7px;
+}
+#inputData{
+  margin-top: 2em;
+  width: 18em;
+  height: 2em;
+  box-sizing: border-box;
+}
+#login_Btn{
+  margin-top: 2em;
+  width: 18em;
+  height: 2em;
+  box-sizing: border-box;
+  background-color: rgb(55, 55, 246);
+  border: none;
+  color: white;
+}
+#forgotBtn{
+  margin-top: 5px;
+  color: rgb(55, 55, 246);
+}
+#h-Line{
+    align-items: center;
+    border-bottom: 1px solid black;
+    display: flex;
+    margin: 20px 16px;
+    text-align: center;
+}
+#create-Btn{
+ 
+  box-sizing: border-box;
+  height: 2em;
+  width: 10em;
+  background-color: rgb(42, 189, 42);
+  color: white;
+  border: none;
+
+}
+

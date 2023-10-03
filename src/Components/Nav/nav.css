@@ -1,0 +1,14 @@
+.link {
+    text-decoration: none;
+    color: white;
+    border: 0;
+  }
+  
+  .active-link {
+    text-decoration: none;
+    color: white;
+    border: 0;
+  }
+  .search-Bar{
+    width: 100%;
+  }
