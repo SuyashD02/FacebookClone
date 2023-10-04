@@ -9,6 +9,45 @@
     color: white;
     border: 0;
   }
+
+
+  /*Search Bar*/
   .search-Bar{
     width: 100%;
+  }
+
+  /*Modal Box */
+  .modalBox{
+    border: 2px solid black;
+    height: 65vh;
+    width: 22em;
+    margin: 0px 20px 0px 0px;
+    background-color: white;
+  }
+  .boxUser{
+    border: 2px solid black;
+    box-shadow: 1px 2px 5px black;
+    margin: 10px 20px 0px 20px;
+    height: 70px;
+    border: none;
+    border-radius: 5px;
+  }
+  .modalAcountIcon{
+    display: grid;
+    justify-content: right;
+  }
+  .acountData{
+    display: flex;
+    align-items: center;
+    gap: 2em;
+    margin-top: 2px;
+    margin-left: 10px;
+  
+  }
+  .seeAllListButton{
+    height: 27px; 
+  }
+  .listItemProfile{
+    margin: 12px 10px 0px 10px;
+    border-radius: 5px;
   }

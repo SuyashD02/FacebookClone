@@ -1,0 +1,51 @@
+.gridBox {
+    margin-top: 50px;  
+  }
+  
+  .paper {
+    position: relative;
+    height: 200px;
+    width: 130px;
+  }
+
+  .searchBox{
+   
+    border: 2px solid black;
+    box-shadow: 1px 2px 5px black;
+    width: 24em;
+    height: 15vh;
+    margin-top: 10%;
+    border: none;
+    border-radius: 5px;
+  }
+  .searchSection{
+    display: grid;
+    justify-content: center;
+  }
+  .searchBar{
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+    
+  }
+  .searchInputpost{
+    color: inherit;
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    
+  }
+  .postBox{
+    border: 2px solid black;
+    box-shadow: 1px 2px 5px black;
+    width: 24em;
+    height: 75vh;
+    margin-top: 10%;
+    border: none;
+    border-radius: 5px;
+    
+  }
+  .postSection{
+    display: grid;
+    justify-content: center;
+  }

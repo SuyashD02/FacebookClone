@@ -9,19 +9,23 @@ import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import Divider from '@mui/material/Divider';
-
+import { Modal } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import Settings from '@mui/icons-material/Settings';
+import Logout from '@mui/icons-material/Logout';
+import HelpIcon from '@mui/icons-material/Help';
+import FeedbackRoundedIcon from '@mui/icons-material/FeedbackRounded';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
-import Modal from '@mui/material/Modal';
-
-import HomePage from '../HomePage';
+import ListItemButton from '@mui/material/ListItemButton';
+import { BrowserRouter, Link, NavLink, Route, Routes } from "react-router-dom";
+import Divider from '@mui/material/Divider';
+import HomePage from '../Home Page/HomePage';
 import SearchBar from './SearchBar';
 import './nav.css'
+import loginForm from '../Login/LoginPage';
 const Search = styled('div')(({ theme }) => ({
   display:'flex',
   alignItems:'center',
@@ -60,15 +64,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-  const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose =()=> setOpen(false);
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -79,26 +79,9 @@ export default function PrimarySearchAppBar() {
   };
 
   const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleClose}
-    >
-      <MenuItem onClick={handleClose}>Profile</MenuItem>
-      <MenuItem onClick={handleClose}>My account</MenuItem>
-    </Menu>
-  );
+  
+
+            {/*For Mobile view*/}
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
@@ -152,21 +135,14 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
   const [searchTerm, setSearchTerm] = useState("");
-
-  const style = {
-    position: 'absolute',
-    top: '38%',
-    marginLeft:170,
-    transform: 'translate(-50%, -50%)',
-    width: 300,
-    height: 400,
-    padding: "2%",
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 3,
-  };
-
+  const [isLoggedIn, setIsLoggedIn]=useState(false);
+  const habdleLoginLogout=()=>{
+    if(isLoggedIn){
+      setIsLoggedIn(false);
+    }else{
+    }
+  }
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -228,108 +204,85 @@ export default function PrimarySearchAppBar() {
               color="inherit"
             >
               <AccountCircle />
+              
             </IconButton>
             
-            
-            
+
+        <section className='modalSection'>
             <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description">
-        
-        
-        <Box sx={style}>
-          <AppBar position="static">
-            <Toolbar >
-          <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-            </Toolbar>
-          </AppBar>
-        <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            className='modalAcountIcon'
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <section>
+        <Box className="modalBox">
+          <div>
+            <Box className="boxUser">
+            <ListItemButton>
+              <div className='acountData'>
+                <AccountCircle />
+              <Typography>Name</Typography>
+              </div>
+              </ListItemButton>
+              <Divider />
+              <ListItemButton className='seeAllListButton'>
+              <div className='SeeAll'>
+              <Typography>See all profile</Typography>
+              </div>
+              </ListItemButton>
+              
+            </Box>
+          </div>
+          
+          <div className='modalList'>
+            <div className="listItemProfile">
+          <ListItemButton>
+          <Settings />
+          <Typography id="modal-modal-title" variant="h6" component="h2" role='button'>
+          Settings & privacy
           </Typography>
-            </IconButton>
-            <Divider />
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+          </ListItemButton>
+          </div>
+          <div className="listItemProfile">
+          <ListItemButton>
+            <HelpIcon/>
+          <Typography id="modal-modal-title" variant="h6" component="h2" role='button'>
+          Help & support
           </Typography>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+          </ListItemButton>
+          </div>
+          <div className="listItemProfile">
+          <ListItemButton>
+          <Typography id="modal-modal-title" variant="h6" component="h2" role='button'>
+          Display & accessibility
+
           </Typography>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+          </ListItemButton>
+          </div>
+          <div className="listItemProfile">
+          <ListItemButton>
+            <FeedbackRoundedIcon />
+          <Typography id="modal-modal-title" variant="h6" component="h2" role='button'>
+          Give feedback
           </Typography>
-            </IconButton>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </ListItemButton>
+          </div>
+          <div className="listItemProfile" onClick={habdleLoginLogout}>
+          <ListItemButton >
+            <Logout/>
+          <Typography id="modal-modal-title" variant="h6" component="h2" role='button'>
+            {isLoggedIn ? 'Login':'Login'}
           </Typography>
+          </ListItemButton>
+          </div>
+
+          </div>
         </Box>
+        </section>
       </Modal>
+      </section>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -342,15 +295,15 @@ export default function PrimarySearchAppBar() {
             >
               <MoreIcon />
             </IconButton>
+            
           </Box>
         </Toolbar>
       </AppBar>
       <Routes>
           <Route path='/HomePage' element={<HomePage />}/>
-          
+          <Route path='/loginForm' element={<loginForm />}/>
           </Routes>
       {renderMobileMenu}
-      {renderMenu}
     </Box>
   );
 }
