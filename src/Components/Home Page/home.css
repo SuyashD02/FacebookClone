@@ -13,7 +13,7 @@
     border: 2px solid black;
     box-shadow: 1px 2px 5px black;
     width: 24em;
-    height: 15vh;
+    height: 14vh;
     margin-top: 10%;
     border: none;
     border-radius: 5px;
@@ -52,4 +52,18 @@
   .imgPost{
     display: grid;
     width: 24em;
+  }
+  #divider{
+    margin-top: 5px;
+  }
+ 
+  .filterButtons{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5px;
+  }
+  .postButtons{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
   }

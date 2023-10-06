@@ -9,6 +9,7 @@ import AddAPhotoRoundedIcon from '@mui/icons-material/AddAPhotoRounded';
 import MoodRoundedIcon from '@mui/icons-material/MoodRounded';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
+import Button from '@mui/material/Button';
 import './home.css'
 
 
@@ -56,11 +57,11 @@ function HomePage(){
                 }}/>
                 
             </div>
-            <Divider />
-            <div>
-              <button>Live video</button>
-              <button><AddAPhotoRoundedIcon /> Photo/video</button>
-              <button><MoodRoundedIcon /> Feeling/activity</button>
+            <Divider id="divider"/>
+            <div className="filterButtons">
+              <Button id="buttonFilter">Live</Button>
+              <Button id="buttonFilter" startIcon={<AddAPhotoRoundedIcon />}> Photo/video</Button>
+              <Button id="buttonFilter" startIcon={<MoodRoundedIcon />}> Feeling/activity</Button>
             </div>
 
             
@@ -80,10 +81,10 @@ function HomePage(){
                <img src={'https://img.freepik.com/free-photo/maldives-island_74190-478.jpg?w=996&t=st=1696610601~exp=1696611201~hmac=b604347e0b051b603ab3ebd409486633c249828ee4da57b9e2d786c4d16dcd2e'} className="imgPost" alt="Image of post"/>
 
             </section>
-            <section>
-              <button><ThumbUpOutlinedIcon /> Like</button>
-              <button><CommentOutlinedIcon /> Comment</button>
-              <button>Send</button>
+            <section className="postButtons">
+              <Button startIcon={<ThumbUpOutlinedIcon />}>Like</Button>
+              <Button startIcon={<CommentOutlinedIcon />}> Comment</Button>
+              <Button>Send</Button>
             </section>
 
         </Box>
