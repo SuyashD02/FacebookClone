@@ -49,3 +49,7 @@
     display: grid;
     justify-content: center;
   }
+  .imgPost{
+    display: grid;
+    width: 24em;
+  }

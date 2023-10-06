@@ -273,7 +273,7 @@ export default function PrimarySearchAppBar() {
           <ListItemButton >
             <Logout/>
           <Typography id="modal-modal-title" variant="h6" component="h2" role='button'>
-            {isLoggedIn ? 'Login':'Login'}
+            {isLoggedIn ? 'Login':'Logout'}
           </Typography>
           </ListItemButton>
           </div>
