@@ -39,7 +39,7 @@
     border: 2px solid black;
     box-shadow: 1px 2px 5px black;
     width: 24em;
-    height: 75vh;
+    height: 95%;
     margin-top: 10%;
     border: none;
     border-radius: 5px;
@@ -48,6 +48,12 @@
   .postSection{
     display: grid;
     justify-content: center;
+  }
+  .accountPostBox{
+    display: flex;
+    gap: 1em;    
+    margin-top: 5px;
+    margin-left: 17px;
   }
   .imgPost{
     display: grid;
@@ -65,5 +71,27 @@
   .postButtons{
     display: flex;
     justify-content: space-around;
-    margin-top: 15px;
+  margin-top: 10px;
+  }
+  .countLikeComment{
+    display: flex;
+    
+  }
+  .countLike{
+    display: flex;
+    gap: 10px;
+    margin-left: 10px;
+  }
+
+  .countComment{
+    display: flex;
+    gap: 10px;
+    margin-left: 10px;
+  }
+  .captionForPost{
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+  #captionPost{
+    font-size: small;
   }
