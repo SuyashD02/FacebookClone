@@ -23,9 +23,10 @@ import ListItemButton from '@mui/material/ListItemButton';
 import { BrowserRouter, Link, NavLink, Route, Routes } from "react-router-dom";
 import Divider from '@mui/material/Divider';
 import HomePage from '../Home Page/HomePage';
-import SearchBar from './SearchBar';
-import './nav.css'
-import loginForm from '../Login/LoginPage';
+import './nav.css';
+import LoginForm from '../Login/LoginPage';
+
+
 const Search = styled('div')(({ theme }) => ({
   display:'flex',
   alignItems:'center',
@@ -63,7 +64,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function Navbar() {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [open, setOpen] = React.useState(false);
@@ -134,15 +135,35 @@ export default function PrimarySearchAppBar() {
       </MenuItem>
     </Menu>
   );
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isLoggedIn, setIsLoggedIn]=useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isLoggedIn, setIsLoggedIn]=useState(true);
   const habdleLoginLogout=()=>{
     if(isLoggedIn){
       setIsLoggedIn(false);
     }else{
     }
   }
-  
+  const handleSearch=()=>{
+    alert(`Search for:${searchQuery}`);
+    //const searchUrl1=('https://academics.newtonschool.co/api/v1/facebook/post?search=searchdata.author.name:${searchQuery}');
+    const searchUrl2=(`https://academics.newtonschool.co/api/v1/facebook/post?search={"author.name":"${searchQuery}"}`);
+    fetch(searchUrl2,{
+      headers:{
+        'projectID':'f104bi07c490'
+      },
+    })
+    .then(response => response.json())
+    .then(searchdata=>{
+      console.log(searchdata)
+    })
+    .catch((error)=>{
+      console.log("Error for fetch search Data",error);
+    });
+    
+};
+const handleInputChange=(e)=>{
+    setSearchQuery(e.target.value);
+};
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -168,12 +189,12 @@ export default function PrimarySearchAppBar() {
             <StyledInputBase className='seachInput'
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-              value={searchTerm}
-              onChange={(e)=>setSearchTerm(e.target.value)}
-              onKeyDown={(e)=>{
-                if(e.key === 'Enter'){
-                  <SearchBar />
-                }
+              value={searchQuery}
+                onChange={handleInputChange}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSearch();
+                  }
               }}
               
             />
@@ -270,12 +291,14 @@ export default function PrimarySearchAppBar() {
           </ListItemButton>
           </div>
           <div className="listItemProfile" onClick={habdleLoginLogout}>
+          <NavLink className={({ isActive }) => (isActive ? "active-link" : "link")} to="/LoginForm">
           <ListItemButton >
             <Logout/>
           <Typography id="modal-modal-title" variant="h6" component="h2" role='button'>
-            {isLoggedIn ? 'Login':'Logout'}
+            {isLoggedIn ? 'Logout':'Login'}
           </Typography>
           </ListItemButton>
+          </NavLink>
           </div>
 
           </div>
@@ -300,8 +323,8 @@ export default function PrimarySearchAppBar() {
         </Toolbar>
       </AppBar>
       <Routes>
-          <Route path='/HomePage' element={<HomePage />}/>
-          <Route path='/loginForm' element={<loginForm />}/>
+          <Route path='/' element={<HomePage />}/>
+          <Route path='/LoginForm' element={<LoginForm />}/>
           </Routes>
       {renderMobileMenu}
     </Box>

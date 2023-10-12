@@ -1,7 +1,6 @@
 import React from "react";
-import Navbar from "../Nav/Navbar";
 import './Login.css';
-export default function loginForm() {
+export default function LoginForm() {
   return (
     <div className="login-Form">
       <div className="login-left">

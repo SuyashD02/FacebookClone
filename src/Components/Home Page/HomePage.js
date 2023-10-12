@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react";
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { Box, IconButton } from "@mui/material";
-import AccountCircle from '@mui/icons-material/AccountCircle';
+import Avatar from '@mui/material/Avatar';
 import InputBase from '@mui/material/InputBase';
 import Divider from '@mui/material/Divider';
 import AddAPhotoRoundedIcon from '@mui/icons-material/AddAPhotoRounded';
@@ -12,7 +12,8 @@ import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-import './home.css'
+import './home.css';
+
 
 
 function HomePage(){
@@ -23,46 +24,32 @@ function HomePage(){
     }
     const handleSearch=()=>{
         alert(`Search for:${searchQuery}`);
-        //const searchUrl1=('https://academics.newtonschool.co/api/v1/facebook/post?search=searchdata.author.name:${searchQuery}');
-        const searchUrl2=(`https://academics.newtonschool.co/api/v1/facebook/post?search={"author.name":"${searchQuery}"}`);
-        fetch(searchUrl2,{
-          headers:{
-            'projectID':'f104bi07c490'
-          },
-        })
-        .then(response => response.json())
-        .then(searchdata=>{
-          console.log(searchdata)
-        })
-        .catch((error)=>{
-          console.log("Error for fetch search Data",error);
-        });
         
     };
     const handleInputChange=(e)=>{
         setSearchQuery(e.target.value);
     };
     const [apiData,setApiData]=useState(null);
-
-    useEffect(()=>{
-      fetch('https://academics.newtonschool.co/api/v1/facebook/post',{
-        headers:{
-          'projectID':'f104bi07c490',
+    useEffect(() => {
+      fetchData();
+    }, []);
+  
+    const fetchData = async () => {
+      const response = await fetch('https://academics.newtonschool.co/api/v1/facebook/post', {
+        headers: {
+          projectID: "f104bi07c490",
         },
-      })
-      .then(response => response.json())
-      .then(data =>{
-        setApiData(data);
-        console.log(data)
-      })
-      .catch((error)=>{
-        console.error("Error for fetching data",error);
       });
-    },[]);
-
+      const r = await response.json();
+      // console.log(r)
+      setApiData(r["data"]);
+    };
+    console.log(apiData);
 
     return(
+      
         <div>
+          
 
     {/* For Status */}
 
@@ -81,7 +68,7 @@ function HomePage(){
     <section className="searchSection">
         <Box className="searchBox">
             <div className="searchBar">
-                <AccountCircle />
+                <Avatar/>
                 <InputBase className="searchInputpost"
                 placeholder={(`What's on your mind,`)}
                 value={searchQuery}
@@ -110,10 +97,11 @@ function HomePage(){
   
     <section className="postSection">
     {apiData &&
-          apiData.data.map((post) => (
+          apiData.map((post) => (
             <Box className="postBox" key={post._id}>
               <div className="accountPostBox">
-                <AccountCircle />
+                {/*<Avatar>{post.author.profileImage}</Avatar>*/}
+                <Avatar alt={post.author.name} src={post.author.profileImage} />
                 <Typography>{post.author.name}</Typography>
               </div>
               <div className="captionForPost">
@@ -125,8 +113,10 @@ function HomePage(){
                   //src={"https://img.freepik.com/free-photo/maldives-island_74190-478.jpg?w=996&t=st=1696610601~exp=1696611201~hmac=b604347e0b051b603ab3ebd409486633c249828ee4da57b9e2d786c4d16dcd2e"}
                   className="imgPost"
                   alt="Image of post"
+
+
                 />
-                <h1>{post.channel.name}</h1>
+                
               </section>
               <section className="countLikeComment">
               <div className="countLike">
