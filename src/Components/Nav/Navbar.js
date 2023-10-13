@@ -20,11 +20,12 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ListItemButton from '@mui/material/ListItemButton';
-import { BrowserRouter, Link, NavLink, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, NavLink, Route, Routes,useNavigate } from "react-router-dom";
 import Divider from '@mui/material/Divider';
 import HomePage from '../Home Page/HomePage';
 import './nav.css';
 import LoginForm from '../Login/LoginPage';
+import SearchComponent from '../search Item/searchComponent';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -78,6 +79,7 @@ export default function Navbar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  const navigate=useNavigate();
 
   const menuId = 'primary-search-account-menu';
   
@@ -143,22 +145,26 @@ export default function Navbar() {
     }else{
     }
   }
-  const handleSearch=()=>{
-    alert(`Search for:${searchQuery}`);
-    //const searchUrl1=('https://academics.newtonschool.co/api/v1/facebook/post?search=searchdata.author.name:${searchQuery}');
-    const searchUrl2=(`https://academics.newtonschool.co/api/v1/facebook/post?search={"author.name":"${searchQuery}"}`);
-    fetch(searchUrl2,{
-      headers:{
-        'projectID':'f104bi07c490'
-      },
-    })
-    .then(response => response.json())
-    .then(searchdata=>{
-      console.log(searchdata)
-    })
-    .catch((error)=>{
-      console.log("Error for fetch search Data",error);
-    });
+  const [apiSearchData,setApiSearchData]=useState([]);
+  const handleSearch = async () => {
+    const searchUrl2 = `https://academics.newtonschool.co/api/v1/facebook/post?search={"author.name":"${searchQuery}"}`;
+    if (searchQuery.trim() === "") {
+      // If searchTerm is empty or contains only whitespace, do not make the API call
+      setApiSearchData([]);
+      return;
+    }
+    try {
+      const response = await fetch(searchUrl2, {
+        headers: {
+          'projectID': 'f104bi07c490'
+        },
+      });
+      const searchData = await response.json();
+      setApiSearchData(searchData["data"]);
+    } catch (error) {
+      console.log("Error fetching search data", error);
+    }
+    navigate('/SearchComponent');
     
 };
 const handleInputChange=(e)=>{
@@ -170,7 +176,7 @@ const handleInputChange=(e)=>{
         
         <Toolbar>
         <Box className='logoFacebook'>
-          <NavLink className={({ isActive }) => (isActive ? "active-link" : "link")} to="/HomePage">
+          <NavLink className={({ isActive }) => (isActive ? "active-link" : "link")} to="/">
           <Typography
             variant="h6"
             noWrap
@@ -325,6 +331,7 @@ const handleInputChange=(e)=>{
       <Routes>
           <Route path='/' element={<HomePage />}/>
           <Route path='/LoginForm' element={<LoginForm />}/>
+          <Route path='/SearchComponent' element={<SearchComponent apiSearchData={apiSearchData}/>}/>
           </Routes>
       {renderMobileMenu}
     </Box>
