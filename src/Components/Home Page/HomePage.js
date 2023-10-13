@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import './home.css';
+import Navbar from "../Nav/Navbar";
 //import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
@@ -52,7 +53,7 @@ function HomePage(){
     return(
       
         <div>
-          
+          <Navbar />
 
     {/* For Status */}
 

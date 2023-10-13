@@ -1,66 +1,72 @@
-import React,{useState} from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import { Modal } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
-import HelpIcon from '@mui/icons-material/Help';
-import FeedbackRoundedIcon from '@mui/icons-material/FeedbackRounded';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert';
-import ListItemButton from '@mui/material/ListItemButton';
-import { BrowserRouter, Link, NavLink, Route, Routes,useNavigate } from "react-router-dom";
-import Divider from '@mui/material/Divider';
-import HomePage from '../Home Page/HomePage';
-import './nav.css';
-import LoginForm from '../Login/LoginPage';
-import SearchComponent from '../search Item/searchComponent';
+import React, { useState } from "react";
+import { styled, alpha } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import InputBase from "@mui/material/InputBase";
+import Badge from "@mui/material/Badge";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import { Modal } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import Settings from "@mui/icons-material/Settings";
+import Logout from "@mui/icons-material/Logout";
+import HelpIcon from "@mui/icons-material/Help";
+import FeedbackRoundedIcon from "@mui/icons-material/FeedbackRounded";
+import MailIcon from "@mui/icons-material/Mail";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import MoreIcon from "@mui/icons-material/MoreVert";
+import ListItemButton from "@mui/material/ListItemButton";
+import {
+  BrowserRouter,
+  Link,
+  NavLink,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
+import Divider from "@mui/material/Divider";
+import HomePage from "../Home Page/HomePage";
+import "./nav.css";
+import LoginForm from "../Login/LoginPage";
+import SearchComponent from "../search Item/searchComponent";
 
-
-const Search = styled('div')(({ theme }) => ({
-  display:'flex',
-  alignItems:'center',
-  marginLeft:'15%',
-  width:'50%',
+const Search = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  marginLeft: "15%",
+  width: "50%",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
+  "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
-  }
+  },
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
+const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  width:'100%',
-  '& .MuiInputBase-input': {
+  color: "inherit",
+  width: "100%",
+  "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
     },
   },
 }));
@@ -70,7 +76,7 @@ export default function Navbar() {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose =()=> setOpen(false);
+  const handleClose = () => setOpen(false);
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -79,26 +85,27 @@ export default function Navbar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
-  const menuId = 'primary-search-account-menu';
-  
+  const menuId = "primary-search-account-menu";
 
-            {/*For Mobile view*/}
+  {
+    /*For Mobile view*/
+  }
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: "top",
+        horizontal: "right",
       }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: "top",
+        horizontal: "right",
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
@@ -138,14 +145,13 @@ export default function Navbar() {
     </Menu>
   );
   const [searchQuery, setSearchQuery] = useState("");
-  const [isLoggedIn, setIsLoggedIn]=useState(true);
-  const habdleLoginLogout=()=>{
-    if(isLoggedIn){
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const habdleLoginLogout = () => {
+    if (isLoggedIn) {
       setIsLoggedIn(false);
-    }else{
     }
-  }
-  const [apiSearchData,setApiSearchData]=useState([]);
+  };
+  const [apiSearchData, setApiSearchData] = useState([]);
   const handleSearch = async () => {
     const searchUrl2 = `https://academics.newtonschool.co/api/v1/facebook/post?search={"author.name":"${searchQuery}"}`;
     if (searchQuery.trim() === "") {
@@ -156,7 +162,7 @@ export default function Navbar() {
     try {
       const response = await fetch(searchUrl2, {
         headers: {
-          'projectID': 'f104bi07c490'
+          projectID: "f104bi07c490",
         },
       });
       const searchData = await response.json();
@@ -164,50 +170,54 @@ export default function Navbar() {
     } catch (error) {
       console.log("Error fetching search data", error);
     }
-    navigate('/SearchComponent');
-    
-};
-const handleInputChange=(e)=>{
+    navigate("/SearchComponent");
+  };
+  const handleInputChange = (e) => {
     setSearchQuery(e.target.value);
-};
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        
         <Toolbar>
-        <Box className='logoFacebook'>
-          <NavLink className={({ isActive }) => (isActive ? "active-link" : "link")} to="/">
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
-            facebook
-          </Typography>
-          </NavLink>
+          <Box className="logoFacebook">
+            <NavLink
+              className={({ isActive }) => (isActive ? "active-link" : "link")}
+              to="/"
+            >
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ display: { xs: "none", sm: "block" } }}
+              >
+                facebook
+              </Typography>
+            </NavLink>
           </Box>
-          <Search className='search-Bar'>
+          <Search className="search-Bar">
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase className='seachInput'
+            <StyledInputBase
+              className="seachInput"
               placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ "aria-label": "search" }}
               value={searchQuery}
-                onChange={handleInputChange}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleSearch();
-                  }
+              onChange={handleInputChange}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
               }}
-              
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <IconButton
+              size="large"
+              aria-label="show 4 new mails"
+              color="inherit"
+            >
               <Badge badgeContent={4} color="error">
                 <MailIcon />
               </Badge>
@@ -231,89 +241,117 @@ const handleInputChange=(e)=>{
               color="inherit"
             >
               <AccountCircle />
-              
             </IconButton>
-            
 
-        <section className='modalSection'>
-            <Modal
-            className='modalAcountIcon'
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <section>
-        <Box className="modalBox">
-          <div>
-            <Box className="boxUser">
-            <ListItemButton>
-              <div className='acountData'>
-                <AccountCircle />
-              <Typography>Name</Typography>
-              </div>
-              </ListItemButton>
-              <Divider />
-              <ListItemButton className='seeAllListButton'>
-              <div className='SeeAll'>
-              <Typography>See all profile</Typography>
-              </div>
-              </ListItemButton>
-              
-            </Box>
-          </div>
-          
-          <div className='modalList'>
-            <div className="listItemProfile">
-          <ListItemButton>
-          <Settings />
-          <Typography id="modal-modal-title" variant="h6" component="h2" role='button'>
-          Settings & privacy
-          </Typography>
-          </ListItemButton>
-          </div>
-          <div className="listItemProfile">
-          <ListItemButton>
-            <HelpIcon/>
-          <Typography id="modal-modal-title" variant="h6" component="h2" role='button'>
-          Help & support
-          </Typography>
-          </ListItemButton>
-          </div>
-          <div className="listItemProfile">
-          <ListItemButton>
-          <Typography id="modal-modal-title" variant="h6" component="h2" role='button'>
-          Display & accessibility
+            <section className="modalSection">
+              <Modal
+                className="modalAcountIcon"
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <section>
+                  <Box className="modalBox">
+                    <div>
+                      <Box className="boxUser">
+                        <ListItemButton>
+                          <div className="acountData">
+                            <AccountCircle />
+                            <Typography>Name</Typography>
+                          </div>
+                        </ListItemButton>
+                        <Divider />
+                        <ListItemButton className="seeAllListButton">
+                          <div className="SeeAll">
+                            <Typography>See all profile</Typography>
+                          </div>
+                        </ListItemButton>
+                      </Box>
+                    </div>
 
-          </Typography>
-          </ListItemButton>
-          </div>
-          <div className="listItemProfile">
-          <ListItemButton>
-            <FeedbackRoundedIcon />
-          <Typography id="modal-modal-title" variant="h6" component="h2" role='button'>
-          Give feedback
-          </Typography>
-          </ListItemButton>
-          </div>
-          <div className="listItemProfile" onClick={habdleLoginLogout}>
-          <NavLink className={({ isActive }) => (isActive ? "active-link" : "link")} to="/LoginForm">
-          <ListItemButton >
-            <Logout/>
-          <Typography id="modal-modal-title" variant="h6" component="h2" role='button'>
-            {isLoggedIn ? 'Logout':'Login'}
-          </Typography>
-          </ListItemButton>
-          </NavLink>
-          </div>
-
-          </div>
-        </Box>
-        </section>
-      </Modal>
-      </section>
+                    <div className="modalList">
+                      <div className="listItemProfile">
+                        <ListItemButton>
+                          <Settings />
+                          <Typography
+                            id="modal-modal-title"
+                            variant="h6"
+                            component="h2"
+                            role="button"
+                          >
+                            Settings & privacy
+                          </Typography>
+                        </ListItemButton>
+                      </div>
+                      <div className="listItemProfile">
+                        <ListItemButton>
+                          <HelpIcon />
+                          <Typography
+                            id="modal-modal-title"
+                            variant="h6"
+                            component="h2"
+                            role="button"
+                          >
+                            Help & support
+                          </Typography>
+                        </ListItemButton>
+                      </div>
+                      <div className="listItemProfile">
+                        <ListItemButton>
+                          <Typography
+                            id="modal-modal-title"
+                            variant="h6"
+                            component="h2"
+                            role="button"
+                          >
+                            Display & accessibility
+                          </Typography>
+                        </ListItemButton>
+                      </div>
+                      <div className="listItemProfile">
+                        <ListItemButton>
+                          <FeedbackRoundedIcon />
+                          <Typography
+                            id="modal-modal-title"
+                            variant="h6"
+                            component="h2"
+                            role="button"
+                          >
+                            Give feedback
+                          </Typography>
+                        </ListItemButton>
+                      </div>
+                      <div
+                        className="listItemProfile"
+                        onClick={habdleLoginLogout}
+                      >
+                        <NavLink
+                          className={({ isActive }) =>
+                            isActive ? "active-link" : "link"
+                          }
+                          to="/LoginForm"
+                        >
+                          <ListItemButton>
+                            <Logout />
+                            <Typography
+                              id="modal-modal-title"
+                              variant="h6"
+                              component="h2"
+                              role="button"
+                            >
+                              {isLoggedIn ? "Logout" : "Login"}
+                            </Typography>
+                          </ListItemButton>
+                        </NavLink>
+                      </div>
+                    </div>
+                  </Box>
+                </section>
+              </Modal>
+            </section>
           </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="show more"
@@ -324,15 +362,17 @@ const handleInputChange=(e)=>{
             >
               <MoreIcon />
             </IconButton>
-            
           </Box>
         </Toolbar>
       </AppBar>
       <Routes>
-          <Route path='/' element={<HomePage />}/>
-          <Route path='/LoginForm' element={<LoginForm />}/>
-          <Route path='/SearchComponent' element={<SearchComponent apiSearchData={apiSearchData}/>}/>
-          </Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/LoginForm" element={<LoginForm />} />
+        <Route
+          path="/SearchComponent"
+          element={<SearchComponent apiSearchData={apiSearchData} />}
+        />
+      </Routes>
       {renderMobileMenu}
     </Box>
   );

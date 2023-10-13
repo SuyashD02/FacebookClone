@@ -10,7 +10,7 @@ function SearchComponent({apiSearchData}){
     return(
         <div>
             <section className="postSection">
-    {apiSearchData &&
+    {
           apiSearchData.map((post) => (
             <Box className="postBox" key={post._id}>
               <div className="accountPostBox">
