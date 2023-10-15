@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import './Login.css';
+import "./Login.css";
 import HomePage from "../Home Page/HomePage";
 import { Link, useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
 
 export default function LoginForm() {
   const projectID = "f104bi07c490";
@@ -9,7 +10,7 @@ export default function LoginForm() {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // New state for login status
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   function mailInput(e) {
@@ -30,7 +31,7 @@ export default function LoginForm() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "projectID": projectID,
+            projectID: projectID,
           },
           body: JSON.stringify({
             email: mail,
@@ -41,7 +42,7 @@ export default function LoginForm() {
       );
       if (response.ok) {
         console.log("Successfully logged in");
-        setIsLoggedIn(true); // Set the login status to true
+        setIsLoggedIn(true);
         navigate("/HomePage");
       } else {
         const errorData = await response.json();
@@ -58,34 +59,53 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="login-Form">
-      <div className="login-left">
-        <h1 id="login-Heading">Facebook</h1>
-        <p id="login-para">
-          Facebook helps you connect and share with the people in your life.
-        </p>
-      </div>
-      <div className="login-right">
-        <input
-          type="email"
-          id="emailInput"
-          value={mail}
-          onChange={mailInput}
-          placeholder="Email address or phone number"
-        />
-        <input
-          type="password"
-          id="passwordInput"
-          value={password}
-          onChange={passwordInput}
-          placeholder="Password"
-        />
-        <div id="buttons">
-          <button id="login_Btn" onClick={handleLoginClick}>Log in</button>
-          <h6 id="forgotBtn">Forgotten Password?</h6>
-          <div id="h-Line"></div>
-          <button id="create-Btn">Create a new account</button>
+    <div className="login">
+      <div className="left-Content">
+        <div className="login-left">
+          <h1 id="loginHeading">Facebook</h1>
+          <p id="login-para">
+            Facebook helps you connect and share with the people in your life.
+          </p>
         </div>
+      </div>
+      <div className="right-Content">
+        <div className="login-right">
+          
+          <Box className="inputSection">
+            <div className="input">
+              <input
+                type="email"
+                id="emailInput"
+                value={mail}
+                onChange={mailInput}
+                placeholder="Email address or phone number"
+              />
+
+              <input
+                type="password"
+                id="passwordInput"
+                value={password}
+                onChange={passwordInput}
+                placeholder="Password"
+              />
+            </div>
+            <div id="buttons">
+              <div className="loginFBtn">
+              <button id="logIn-Button" onClick={handleLoginClick}>
+                Log in
+              </button>
+              <h6 id="forgot-Btn">Forgotten Password?</h6>
+              </div>
+              <div id="h-Line"></div>
+              <div className="createNew-Btn">
+              <button id="createBtn">Create a new account</button>
+              </div>
+            </div>
+          </Box>
+         
+          
+        </div>
+        
       </div>
     </div>
   );

@@ -1,88 +1,90 @@
-.login-Form {
-    font-family: sans-serif;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    background-color: rgb(219, 218, 218);
-    padding: 7.85em;
-  }
-  @media only screen and (max-width: 900px){.login-Form {
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-  }
-  }
-  @media only screen and (max-width: 1075px){.login-Form {
-      height: 39.45em;
-      width: 100%;
-  }
-  }
-  @media only screen and (max-width: 900px)
-  {
-    .login-left{
-      padding: 0;
-  }}
-  @media only screen and (max-width: 1075px)
-  {.login-left {
-      font-size: 24px;
-      
-      
-      
-  }}
-  .login-left {
-    margin: 100px 0px 0px 80px;
-    width: 18em;
-  }
-  .login-right {
-    margin: 70px;
-  }
-  #login-Heading{
-    color: #0866ff;
-    text-align: left;
-    
-  }
-  #login-para{
-    text-align: left;
-  }
-  .input-Form{
-    height: 16.5em;
-    background-color: white;
-    width: 20em;
-    border-radius: 7px;
-  }
-  #inputData{
-    margin-top: 2em;
-    width: 18em;
-    height: 2em;
-    box-sizing: border-box;
-  }
-  #login_Btn{
-    margin-top: 2em;
-    width: 18em;
-    height: 2em;
-    box-sizing: border-box;
-    background-color:#0866ff;
-    border: none;
-    color: white;
-  }
-  #forgotBtn{
-    margin-top: 5px;
-    color: #0866ff;
-  }
-  #h-Line{
-      align-items: center;
-      border-bottom: 1px solid black;
-      display: flex;
-      margin: 20px 16px;
-      text-align: center;
-  }
-  #create-Btn{
-   
-    box-sizing: border-box;
-    height: 2em;
-    width: 10em;
-    background-color: rgb(42, 189, 42);
-    color: white;
-    border: none;
+.login{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-color: lightgrey;
+}
+.left-Content{
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+}
+.right-Content{
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.login-left{
+  margin-top: 250px;
+  font-size: 1.4rem;
+}
+.login-right{
+  margin-top: 85px;
+  background-color: white;
+  height: 340px;
+  padding: 10px;
+  width: 23em;
+  box-shadow: 1px 2px 5px rgb(41, 41, 41);
+  border: none;
+  border-radius: 8px;
+}
+.input{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 10px;
+}
+.loginFBtn{
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.createNew-Btn{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+#emailInput{
+  padding: 10px;
+  border: 0.5px solid lightgrey;
+  border-radius: 5px;
+}
+#passwordInput{
+  padding: 10px;
+  border: 0.5px solid lightgrey;
+  border-radius: 5px;
+}
+#logIn-Button{
+  padding: 10px;
+  width: 100%;
+  margin-top: 20px;
+  color: white;
+  background-color: #0866FF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#loginHeading{
+  color: #0866FF;
+}
+#createBtn{
+  background-color: #42b72a;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 25px;
+  cursor: pointer;
+}
+#forgot-Btn{
+  color: #0866FF;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.create-Footer{
+  background-color: aqua;
   
-  }
+}

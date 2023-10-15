@@ -146,6 +146,7 @@ export default function Navbar() {
   );
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [searchPerformed,setSearchPerformed]=useState(false);
   const habdleLoginLogout = () => {
     if (isLoggedIn) {
       setIsLoggedIn(false);
@@ -157,6 +158,7 @@ export default function Navbar() {
     if (searchQuery.trim() === "") {
       // If searchTerm is empty or contains only whitespace, do not make the API call
       setApiSearchData([]);
+      setSearchPerformed(false);
       return;
     }
     try {
@@ -167,6 +169,7 @@ export default function Navbar() {
       });
       const searchData = await response.json();
       setApiSearchData(searchData["data"]);
+      setSearchPerformed(true);
     } catch (error) {
       console.log("Error fetching search data", error);
     }
@@ -366,7 +369,7 @@ export default function Navbar() {
         </Toolbar>
       </AppBar>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={searchPerformed? null : <HomePage />} />
         <Route path="/LoginForm" element={<LoginForm />} />
         <Route
           path="/SearchComponent"
