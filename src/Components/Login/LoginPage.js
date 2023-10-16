@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./Login.css";
-import HomePage from "../Home Page/HomePage";
 import { Link, useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 
-export default function LoginForm() {
+
+export default function LoginPage() {
   const projectID = "f104bi07c490";
 
   const [mail, setMail] = useState("");
@@ -43,7 +43,7 @@ export default function LoginForm() {
       if (response.ok) {
         console.log("Successfully logged in");
         setIsLoggedIn(true);
-        navigate("/HomePage");
+        navigate("/Main");
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message);
@@ -54,9 +54,7 @@ export default function LoginForm() {
     }
   }
 
-  if (isLoggedIn) {
-    return <HomePage />;
-  }
+  
 
   return (
     <div className="login">
@@ -98,8 +96,11 @@ export default function LoginForm() {
               </div>
               <div id="h-Line"></div>
               <div className="createNew-Btn">
+              <Link to={"/signup"}>
               <button id="createBtn">Create a new account</button>
+              </Link>
               </div>
+
             </div>
           </Box>
          

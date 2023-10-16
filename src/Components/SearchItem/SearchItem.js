@@ -6,12 +6,16 @@ import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-function SearchComponent({apiSearchData}){
+import { useAuth } from "../Context/Context";
+import Navbar from "../Nav/Navbar";
+function SearchComponent(){
+  const {apiSearch}=useAuth();
     return(
         <div>
+          <Navbar/>
             <section className="postSection">
-    {
-          apiSearchData.map((post) => (
+    {apiSearch &&
+          apiSearch.map((post) => (
             <Box className="postBox" key={post._id}>
               <div className="accountPostBox">
                 {/*<Avatar>{post.author.profileImage}</Avatar>*/}
@@ -52,6 +56,7 @@ function SearchComponent({apiSearchData}){
             </Box>
           ))}
     </section>
+   
         </div>
     )
 }

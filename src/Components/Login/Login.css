@@ -4,6 +4,27 @@
   display: flex;
   background-color: lightgrey;
 }
+@media(max-width:400px) {
+  .login{
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+    
+  }
+  .left-Content{
+    margin-top: 0px;
+    border: 1px solid #42b72a;
+  }
+  .login-left{
+    border: 1px solid black;
+    margin-top: -100px;
+  }
+  .login-right{
+    margin-top: 0px;
+  }
+  
+}
 .left-Content{
   width: 50vw;
   display: flex;

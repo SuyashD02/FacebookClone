@@ -20,6 +20,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import ListItemButton from "@mui/material/ListItemButton";
+import { useAuth } from "../Context/Context";
 import {
   BrowserRouter,
   Link,
@@ -29,10 +30,10 @@ import {
   useNavigate,
 } from "react-router-dom";
 import Divider from "@mui/material/Divider";
-import HomePage from "../Home Page/HomePage";
+
 import "./nav.css";
-import LoginForm from "../Login/LoginPage";
-import SearchComponent from "../search Item/searchComponent";
+
+
 
 const Search = styled("div")(({ theme }) => ({
   display: "flex",
@@ -146,13 +147,14 @@ export default function Navbar() {
   );
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [searchPerformed,setSearchPerformed]=useState(false);
+  const [searchPerformed, setSearchPerformed] = useState(false);
+  const {setApiSearchData}=useAuth();
   const habdleLoginLogout = () => {
     if (isLoggedIn) {
       setIsLoggedIn(false);
     }
   };
-  const [apiSearchData, setApiSearchData] = useState([]);
+
   const handleSearch = async () => {
     const searchUrl2 = `https://academics.newtonschool.co/api/v1/facebook/post?search={"author.name":"${searchQuery}"}`;
     if (searchQuery.trim() === "") {
@@ -173,7 +175,7 @@ export default function Navbar() {
     } catch (error) {
       console.log("Error fetching search data", error);
     }
-    navigate("/SearchComponent");
+    navigate("/search");
   };
   const handleInputChange = (e) => {
     setSearchQuery(e.target.value);
@@ -185,7 +187,7 @@ export default function Navbar() {
           <Box className="logoFacebook">
             <NavLink
               className={({ isActive }) => (isActive ? "active-link" : "link")}
-              to="/"
+              to="/Main"
             >
               <Typography
                 variant="h6"
@@ -329,24 +331,21 @@ export default function Navbar() {
                         className="listItemProfile"
                         onClick={habdleLoginLogout}
                       >
-                        <NavLink
-                          className={({ isActive }) =>
-                            isActive ? "active-link" : "link"
-                          }
-                          to="/LoginForm"
-                        >
-                          <ListItemButton>
-                            <Logout />
-                            <Typography
-                              id="modal-modal-title"
-                              variant="h6"
-                              component="h2"
-                              role="button"
-                            >
-                              {isLoggedIn ? "Logout" : "Login"}
-                            </Typography>
-                          </ListItemButton>
-                        </NavLink>
+                        <Link to="/">
+                        <ListItemButton>
+                          <Logout />
+                          <Typography
+                            id="modal-modal-title"
+                            variant="h6"
+                            component="h2"
+                            role="button"
+                          >
+                            {isLoggedIn ? "Logout" : "Login"}
+                          </Typography>
+                        </ListItemButton>
+                        </Link>
+                        
+
                       </div>
                     </div>
                   </Box>
@@ -368,15 +367,9 @@ export default function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      <Routes>
-        <Route path="/" element={searchPerformed? null : <HomePage />} />
-        <Route path="/LoginForm" element={<LoginForm />} />
-        <Route
-          path="/SearchComponent"
-          element={<SearchComponent apiSearchData={apiSearchData} />}
-        />
-      </Routes>
+
       {renderMobileMenu}
+     
     </Box>
   );
 }
