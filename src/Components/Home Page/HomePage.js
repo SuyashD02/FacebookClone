@@ -47,7 +47,7 @@ function HomePage(){
       // console.log(r)
       setApiData(r["data"]);
     };
-    console.log(apiData);
+    
 
     return(
       

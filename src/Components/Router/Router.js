@@ -17,6 +17,7 @@ const Router =()=>{
             <Route path="/search" element={<SearchComponent />}/>
             
         </Routes>
+        
         </BrowserRouter>
     )
 }

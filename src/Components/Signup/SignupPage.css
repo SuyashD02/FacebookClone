@@ -1,0 +1,155 @@
+.signup-Page{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: #ececec;
+}
+.headingSignup{
+    color: #0866FF;
+    font-size: 25px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+.signupBox{
+    margin-top: 10px;
+    background-color: white;
+    height: 500px;
+    padding: 10px;
+    width: 20em;
+    box-shadow: 1px 2px 5px rgb(41, 41, 41);
+    border: none;
+    border-radius: 8px;
+}
+.boxHeader{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#signuph5{
+    margin-top: 10px;
+    color: gray;
+}
+#signupDivider{
+    margin-top: 10px;
+}
+
+.signupName{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    height: 5vh;
+    width: 100%;
+    gap: 10px;
+   
+}
+#first-Name{
+   width: 50%;
+    padding: 10px;
+    border: 0.5px solid lightgrey;
+    border-radius: 5px;
+    
+}
+#last-Name{
+    width: 50%;
+    padding: 10px;
+    border: 0.5px solid lightgrey;
+    border-radius: 5px;
+    
+}
+
+.signupMail{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#signupEmail-address{
+    padding: 10px;
+    border: 0.5px solid lightgrey;
+    border-radius: 5px;
+}
+#signupNew-Password{
+    padding: 10px;
+    border: 0.5px solid lightgrey;
+    border-radius: 5px;
+}
+.signupDate{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+
+    
+}
+#dateh3{
+    font-size: 15px;
+}
+.dateBtn{
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+.signupDOB{
+    margin-top: 10px;
+    width: 30%;
+    padding: 5px;
+    border: 0.5px solid lightgrey;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.signupRadio{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+}
+.signupRadioBtn{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.radioInput{
+    padding: 5px;
+    width: 30%;
+    border: 0.5px solid lightgrey;
+    border-radius: 5px;
+    
+    cursor: pointer;
+}
+.signupClick{
+    display: flex;
+    justify-content: space-around;
+}
+.signupSpan{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 10px;
+}
+
+.signupBtnSection{
+    display: flex;
+    justify-content: center;
+}
+.signupBtn{
+    background-color: #42b72a;
+    color: white;
+    width: 50%;
+    padding: 5px;
+    font-weight: bolder;
+    font-size: 15px;
+    border: 0.5px solid lightgrey;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.signupLinkBtnSection{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    font-size: 10px;
+    color: #0866FF;
+    cursor: pointer;
+}
