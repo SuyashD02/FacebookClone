@@ -152,6 +152,7 @@ export default function Navbar() {
   const habdleLoginLogout = () => {
     if (isLoggedIn) {
       setIsLoggedIn(false);
+      localStorage.removeItem('token');
     }
   };
 
@@ -261,10 +262,12 @@ export default function Navbar() {
                     <div>
                       <Box className="boxUser">
                         <ListItemButton>
+                          <Link to={"/profile"}>
                           <div className="acountData">
                             <AccountCircle />
                             <Typography>Name</Typography>
                           </div>
+                          </Link>
                         </ListItemButton>
                         <Divider />
                         <ListItemButton className="seeAllListButton">
@@ -290,6 +293,7 @@ export default function Navbar() {
                         </ListItemButton>
                       </div>
                       <div className="listItemProfile">
+                      <Link to={"/createPage"}>
                         <ListItemButton>
                           <HelpIcon />
                           <Typography
@@ -298,11 +302,13 @@ export default function Navbar() {
                             component="h2"
                             role="button"
                           >
-                            Help & support
+                            Page
                           </Typography>
                         </ListItemButton>
+                        </Link>
                       </div>
                       <div className="listItemProfile">
+                       
                         <ListItemButton>
                           <Typography
                             id="modal-modal-title"
@@ -313,6 +319,8 @@ export default function Navbar() {
                             Display & accessibility
                           </Typography>
                         </ListItemButton>
+                        
+                        
                       </div>
                       <div className="listItemProfile">
                         <ListItemButton>

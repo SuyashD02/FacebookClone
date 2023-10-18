@@ -1,0 +1,16 @@
+.profileHeader{
+    background-color: #ececec;
+
+}
+.profileImage{
+    display: flex;
+    justify-content: center;
+    height: 35vh;
+    
+}
+.profileAvtar{
+    display: flex;
+    justify-content:center;
+    gap: 50px;
+    margin-top: 10px;
+}

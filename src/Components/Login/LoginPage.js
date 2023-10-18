@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
+import { useAuth } from "../Context/Context";
 
 
 export default function LoginPage() {
@@ -12,6 +13,7 @@ export default function LoginPage() {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const {setToken}=useAuth();
 
   function mailInput(e) {
     const mailSet = e.target.value;
@@ -42,6 +44,9 @@ export default function LoginPage() {
       );
       if (response.ok) {
         console.log("Successfully logged in");
+        const data = await response.json();
+        console.log("Login Data:", data);
+        localStorage.setItem("token", data.token);
         setIsLoggedIn(true);
         navigate("/Main");
       } else {
@@ -92,7 +97,9 @@ export default function LoginPage() {
               <button id="logIn-Button" onClick={handleLoginClick}>
                 Log in
               </button>
+              <Link to={"/updatePassword"}>
               <h6 id="forgot-Btn">Forgotten Password?</h6>
+              </Link>
               </div>
               <div id="h-Line"></div>
               <div className="createNew-Btn">

@@ -1,0 +1,77 @@
+.pageContent{
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ececec;
+    font-style: normal;
+}
+.pageBox{
+    margin-top: 30%;
+    background-color: white;
+    height: 500px;
+    padding: 10px;
+    width: 20em;
+    box-shadow: 1px 2px 5px rgb(41, 41, 41);
+    border-radius: 8px;
+}
+.pageHeader{
+    font-size: 25px;
+}
+#pageHeaderPara{
+    font-size: 18px;
+    margin-top: 10px;
+}
+.pageNameInput{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+#pageName{
+    padding: 10px;
+    border: 0.5px solid lightgrey;
+    border-radius: 5px;
+}
+#pageNameh3{
+    font-size: 12px;
+    margin-top: 5px;
+}
+.pageCategoryInput{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+#pageCategory{
+    padding: 10px;
+    border: 0.5px solid lightgrey;
+    border-radius: 5px;
+}
+#pageCategoryh3{
+    font-size: 12px;
+    margin-top: 5px;
+}
+.pageBioInput{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+#pageBio{
+    padding: 10px;
+    border: 0.5px solid lightgrey;
+    border-radius: 5px;
+    height: 15vh;
+}
+#pageBioh3{
+    font-size: 12px;
+    margin-top: 5px;
+}
+.pageBtn{
+    padding: 10px;
+  width: 100%;
+  margin-top: 30px;
+  color: white;
+  background-color: #0866FF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
