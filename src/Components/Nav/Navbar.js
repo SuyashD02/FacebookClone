@@ -12,6 +12,10 @@ import Menu from "@mui/material/Menu";
 import { Modal } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import { StorefrontOutlined, SupervisedUserCircle } from "@mui/icons-material";
+import HomeIcon from '@mui/icons-material/Home';
+import FlagIcon from '@mui/icons-material/Flag';
+import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import HelpIcon from "@mui/icons-material/Help";
@@ -38,12 +42,13 @@ import "./nav.css";
 const Search = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  marginLeft: "15%",
+  marginLeft: "2rem",
+  marginRight: "8rem",
   width: "50%",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: "lightgray",
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: ("lightgray", 0.25),
   },
 }));
 
@@ -111,8 +116,8 @@ export default function Navbar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 8 new mails" color="inherit">
+      <MenuItem >
+        <IconButton size="large" aria-label="show 8 new mails" color="#0866FF">
           <Badge badgeContent={8} color="error">
             <MailIcon />
           </Badge>
@@ -123,7 +128,7 @@ export default function Navbar() {
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
-          color="inherit"
+          color="#0866FF"
         >
           <Badge badgeContent={17} color="error">
             <NotificationsIcon />
@@ -137,7 +142,7 @@ export default function Navbar() {
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
+          color="#0866FF"
         >
           <AccountCircle />
         </IconButton>
@@ -183,7 +188,7 @@ export default function Navbar() {
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar className="navAppBar" style={{ backgroundColor: 'white' }} position="static">
         <Toolbar>
           <Box className="logoFacebook">
             <NavLink
@@ -194,12 +199,13 @@ export default function Navbar() {
                 variant="h6"
                 noWrap
                 component="div"
-                sx={{ display: { xs: "none", sm: "block" } }}
+                sx={{ display: { xs: "none", sm: "block" },color: '#0866FF',fontSize:"30px",fontWeight:"bold"  }}
               >
                 facebook
               </Typography>
             </NavLink>
           </Box>
+          <section className="responsiveSection">
           <Search className="search-Bar">
             <SearchIconWrapper>
               <SearchIcon />
@@ -217,12 +223,30 @@ export default function Navbar() {
               }}
             />
           </Search>
+          <div className="header_center">
+                <div className="header_option header_option--active">
+                    <HomeIcon fontSize="large" />
+                </div>
+                <div className="header_option">
+                    <FlagIcon fontSize="large" />
+                </div>
+                <div className="header_option">
+                    <SubscriptionsIcon fontSize="large"/>
+                </div>
+                <div className="header_option">
+                    <StorefrontOutlined fontSize="large"/>
+                </div>
+                <div className="header_option">
+                    <SupervisedUserCircle fontSize="large"/>
+                </div>
+            </div>
+            </section>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               size="large"
               aria-label="show 4 new mails"
-              color="inherit"
+              color="#0866FF"
             >
               <Badge badgeContent={4} color="error">
                 <MailIcon />
@@ -231,7 +255,7 @@ export default function Navbar() {
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
-              color="inherit"
+              color="#0866FF"
             >
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
@@ -244,7 +268,7 @@ export default function Navbar() {
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleOpen}
-              color="inherit"
+              color="#0866FF"
             >
               <AccountCircle />
             </IconButton>
@@ -262,7 +286,7 @@ export default function Navbar() {
                     <div>
                       <Box className="boxUser">
                         <ListItemButton>
-                          <Link to={"/profile"}>
+                          <Link to={"/profile"} className="black-link">
                           <div className="acountData">
                             <AccountCircle />
                             <Typography>Name</Typography>
@@ -293,7 +317,7 @@ export default function Navbar() {
                         </ListItemButton>
                       </div>
                       <div className="listItemProfile">
-                      <Link to={"/createPage"}>
+                      <Link to={"/createPage"}className="black-link">
                         <ListItemButton>
                           <HelpIcon />
                           <Typography
@@ -339,7 +363,7 @@ export default function Navbar() {
                         className="listItemProfile"
                         onClick={habdleLoginLogout}
                       >
-                        <Link to="/">
+                        <Link to="/"className="black-link">
                         <ListItemButton>
                           <Logout />
                           <Typography
@@ -368,7 +392,7 @@ export default function Navbar() {
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
-              color="inherit"
+              color="#0866FF"
             >
               <MoreIcon />
             </IconButton>

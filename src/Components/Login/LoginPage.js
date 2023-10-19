@@ -47,6 +47,7 @@ export default function LoginPage() {
         const data = await response.json();
         console.log("Login Data:", data);
         localStorage.setItem("token", data.token);
+        console.log(data.token);
         setIsLoggedIn(true);
         navigate("/Main");
       } else {

@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import React, { useState } from "react";
 import "./page.css";
+import { useNavigate } from "react-router-dom";
 
 function Page() {
   const [pageName, setPageName] = useState("");
@@ -8,6 +9,7 @@ function Page() {
   const [pageBio, setPageBio] = useState("");
   const bearerToken = localStorage.getItem("token");
   const [error,setErrorMessage] =useState("");
+  const navigate =useNavigate();
 
   async function handleCreate() {
     console.log("Function is called");
@@ -24,12 +26,15 @@ function Page() {
           body: JSON.stringify({
             title: pageName,
             description: pageBio,
-            appType: "facebook",
           }),
         }
       );
       if (response.ok) {
         console.log("Succecfully SignUp");
+        const data = await response.json();
+        console.log("CreatePage Data:", data);
+        navigate("//createPage/page")
+
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message);

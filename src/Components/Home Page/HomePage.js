@@ -21,6 +21,17 @@ import "./home.css";
 function HomePage() {
   const boxes = [1, 2, 3, 4];
   const [searchQuery, setSearchQuery] = useState("");
+  const [postContent, setPostContent] = useState("");
+  const [postImage, setPostImage] = useState(null);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const bearerToken = localStorage.getItem("token");
+  const [errorPost,setErrorPost] =useState("");
+  const [comments, setComments] = useState([]);
+  const [likeCounts, setLikeCounts] = useState({});
+  const [Click,SetClick] =useState(false);
+
   const handlepaperclick = () => {
     alert("paper is clickd!!!!");
   };
@@ -40,17 +51,17 @@ function HomePage() {
       "https://academics.newtonschool.co/api/v1/facebook/post",
       {
         headers: {
+          Authorization: `Bearer ${bearerToken}`,
           projectID: "f104bi07c490",
         },
       }
     );
     const r = await response.json();
-    // console.log(r)
+    //console.log(r)
     setApiData(r["data"]);
   };
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  
+
   const style = {
     position: 'absolute',
     top: '60%',
@@ -63,12 +74,135 @@ function HomePage() {
     boxShadow: 24,
     p: 4,
   };
+ async function fetchCreatedPost() {
+        const response = await fetch(
+          "https://academics.newtonschool.co/api/v1/facebook/post/",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${bearerToken}`,
+              projectID: 'f104bi07c490',
+            },
+          }
+        );
+  }
+
+  const handleCreatePost = async () => {
+    console.log("Function is called");
+    try {
+      const formData = new FormData();
+      formData.append("content", postContent);
+      if (postImage) {
+        formData.append("images", postImage);
+      }
+
+      const response = await fetch(
+        "https://academics.newtonschool.co/api/v1/facebook/post/",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+            projectID: 'f104bi07c490',
+          },
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+        console.log("Succecfully Posted");
+        const data = await response.json();
+        
+        console.log("Post Data:", data);
+        fetchData(); 
+      } else {
+        const errorData = await response.json();
+        setErrorPost(errorData.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setErrorPost("An error occurred. Please try again.");
+    }
+  };
+  const handleOpenImage = () => {
+    const fileInput = document.getElementById("imageInput");
+    fileInput.click();
+  };
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setPostImage(file);
+  };
+
+  const handleLikePost = async (postId) => {
+    console.log("Like Function Called")
+    const isLiked = Click;
+    SetClick(!isLiked);
+    try {
+      const response = await fetch(
+        `https://academics.newtonschool.co/api/v1/facebook/like/${postId}`,
+        {
+          method: isLiked ? "POST" : "DELETE",
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+            projectID: "f104bi07c490",
+          },
+        }
+      );
+      if (response.ok) {
+        console.log(isLiked ? "Like is clicked" : "Unlike is clicked");
+        setLikeCounts((prevCounts) => ({
+          ...prevCounts,
+          [postId]: isLiked ? prevCounts[postId] + 1 : prevCounts[postId] -1,
+        }));
+        
+        
+      } else {
+        const errorData = await response.json();
+        console.error("Error while liking the post:", errorData);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  useEffect(() => {
+    const counts = {};
+    if (apiData) {
+      apiData.forEach((post) => {
+        counts[post._id] = post.likeCount;
+      });
+      setLikeCounts(counts);
+    }
+  }, [apiData]);
+
+
+  const handleFetchComments = async (postId) => {
+    try {
+      const response = await fetch(
+        `https://academics.newtonschool.co/api/v1/facebook/post/${postId}/comments`,
+        {
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+            projectID: "f104bi07c490",
+          },
+        }
+      );
+      if (response.ok) {
+        console.log("Comment is click");
+        const data = await response.json();
+        setComments(data.comments);
+      } else {
+        const errorData = await response.json();
+        console.error("Error while fetching comments:", errorData);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   const imageUrls = [
     "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1147.jpg",
  
-    
   ];
+
 
   return (
     <div>
@@ -86,7 +220,7 @@ function HomePage() {
         </Grid>
       </section>
 
-      {/* For Filter */}
+      {/* For Create Post */}
 
       <section className="searchSection">
         <Box className="searchBox">
@@ -133,18 +267,19 @@ function HomePage() {
                 <h3>name</h3>
                 </section>
                 <section >
-                <textarea id="createPostBio">
+                <textarea id="createPostBio" value={postContent} onChange={(e) => setPostContent(e.target.value)}>
                 What's on your mind, name? 
             </textarea>
+            <input type="file" accept="image/*" style={{ display: "none" }} id="imageInput" onChange={handleImageChange}/>
                 </section>
                 <section className="createPostBar">
                   <h3>Add to your post</h3>
-                  <CollectionsIcon />
+                  <CollectionsIcon onClick={handleOpenImage}/>
                   <PlaceIcon />
 
                 </section>
                 <section>
-                  <button className="createPostBtn">Post</button>
+                  <button className="createPostBtn" onClick={handleCreatePost}>Post</button>
                 </section>
               </Box>
             </Modal>
@@ -181,17 +316,18 @@ function HomePage() {
               <section className="countLikeComment">
                 <div className="countLike">
                   <ThumbUpOutlinedIcon />
-                  <Typography>{post.likeCount}</Typography>
+                  <Typography>{likeCounts[post._id]}</Typography>
                 </div>
                 <div className="countComment">
                   <CommentOutlinedIcon />
+                  
                   <Typography>{post.commentCount}</Typography>
                 </div>
               </section>
               <footer>
                 <section className="postButtons">
-                  <Button startIcon={<ThumbUpOutlinedIcon />}>Like</Button>
-                  <Button startIcon={<CommentOutlinedIcon />}>Comment</Button>
+                  <Button onClick={() => handleLikePost(post._id)} startIcon={<ThumbUpOutlinedIcon />}>Like</Button>
+                  <Button onClick={() => handleFetchComments(post._id)} startIcon={<CommentOutlinedIcon />}>Comment</Button>
                   <Button>Send</Button>
                 </section>
               </footer>
@@ -202,3 +338,5 @@ function HomePage() {
   );
 }
 export default HomePage;
+
+ 

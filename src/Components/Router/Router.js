@@ -8,6 +8,7 @@ import Forgotten from "../Forgotten Password/Forgotten";
 import Page from "../Page/Page";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import MyProfile from "../MyProfile/MyProfile";
+import DetailPage from "../Page/DetailPage";
 
 
 const Router =()=>{
@@ -26,6 +27,7 @@ const Router =()=>{
             
             <Route path="/search" element={<SearchComponent />}/>
             <Route path="/createPage" element={<Page />} />
+            <Route path="/createPage/page" element={<DetailPage />}/>
             
             </Route>
         </Routes>
