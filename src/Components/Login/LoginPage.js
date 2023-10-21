@@ -46,7 +46,9 @@ export default function LoginPage() {
         console.log("Successfully logged in");
         const data = await response.json();
         console.log("Login Data:", data);
+
         localStorage.setItem("token", data.token);
+        
         console.log(data.token);
         setIsLoggedIn(true);
         navigate("/Main");
@@ -82,7 +84,7 @@ export default function LoginPage() {
                 id="emailInput"
                 value={mail}
                 onChange={mailInput}
-                placeholder="Email address or phone number"
+                placeholder="Email address"
               />
 
               <input
@@ -98,9 +100,6 @@ export default function LoginPage() {
               <button id="logIn-Button" onClick={handleLoginClick}>
                 Log in
               </button>
-              <Link to={"/updatePassword"}>
-              <h6 id="forgot-Btn">Forgotten Password?</h6>
-              </Link>
               </div>
               <div id="h-Line"></div>
               <div className="createNew-Btn">

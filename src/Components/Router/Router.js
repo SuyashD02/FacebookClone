@@ -4,11 +4,11 @@ import LoginPage from "../Login/LoginPage";
 import SignUp from "../Signup/SignUp";
 import SearchComponent from "../SearchItem/SearchItem";
 import Main from "../MainPage/Main";
-import Forgotten from "../Forgotten Password/Forgotten";
 import Page from "../Page/Page";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import MyProfile from "../MyProfile/MyProfile";
 import DetailPage from "../Page/DetailPage";
+import UpdatePassword from "../UpdatePassword/UpdatePassword";
 
 
 const Router =()=>{
@@ -16,7 +16,7 @@ const Router =()=>{
         <BrowserRouter>
         <Routes>
             <Route path="/" element={<LoginPage />}/>
-            <Route path="/updatePassword" element={<Forgotten />}/>
+            <Route path="/updatePassword" element={<UpdatePassword />}/>
             <Route path="/signup" element={<SignUp />}/>
             
 

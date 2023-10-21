@@ -347,6 +347,7 @@ export default function Navbar() {
                         
                       </div>
                       <div className="listItemProfile">
+                        <Link to={"/updatePassword"}>
                         <ListItemButton>
                           <FeedbackRoundedIcon />
                           <Typography
@@ -355,9 +356,10 @@ export default function Navbar() {
                             component="h2"
                             role="button"
                           >
-                            Give feedback
+                            Update Password
                           </Typography>
                         </ListItemButton>
+                        </Link>
                       </div>
                       <div
                         className="listItemProfile"

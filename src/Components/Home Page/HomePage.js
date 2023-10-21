@@ -12,8 +12,9 @@ import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import CollectionsIcon from '@mui/icons-material/Collections';
-import PlaceIcon from '@mui/icons-material/Place';
+import CollectionsIcon from "@mui/icons-material/Collections";
+import PlaceIcon from "@mui/icons-material/Place";
+import SendIcon from "@mui/icons-material/Send";
 
 import "./home.css";
 //import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -27,10 +28,11 @@ function HomePage() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const bearerToken = localStorage.getItem("token");
-  const [errorPost,setErrorPost] =useState("");
+  const [errorPost, setErrorPost] = useState("");
   const [comments, setComments] = useState([]);
   const [likeCounts, setLikeCounts] = useState({});
-  const [Click,SetClick] =useState(false);
+  const [commentCount, setCommentCount] = useState({});
+  const [Click, SetClick] = useState(false);
 
   const handlepaperclick = () => {
     alert("paper is clickd!!!!");
@@ -57,34 +59,33 @@ function HomePage() {
       }
     );
     const r = await response.json();
-    //console.log(r)
+    console.log(r);
     setApiData(r["data"]);
   };
-  
 
   const style = {
-    position: 'absolute',
-    top: '60%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "60%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 400,
-    height:320,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    height: 320,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
     boxShadow: 24,
     p: 4,
   };
- async function fetchCreatedPost() {
-        const response = await fetch(
-          "https://academics.newtonschool.co/api/v1/facebook/post/",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${bearerToken}`,
-              projectID: 'f104bi07c490',
-            },
-          }
-        );
+  async function fetchCreatedPost() {
+    const response = await fetch(
+      "https://academics.newtonschool.co/api/v1/facebook/post/",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${bearerToken}`,
+          projectID: "f104bi07c490",
+        },
+      }
+    );
   }
 
   const handleCreatePost = async () => {
@@ -102,7 +103,7 @@ function HomePage() {
           method: "POST",
           headers: {
             Authorization: `Bearer ${bearerToken}`,
-            projectID: 'f104bi07c490',
+            projectID: "f104bi07c490",
           },
           body: formData,
         }
@@ -111,9 +112,9 @@ function HomePage() {
       if (response.ok) {
         console.log("Succecfully Posted");
         const data = await response.json();
-        
+
         console.log("Post Data:", data);
-        fetchData(); 
+        fetchData();
       } else {
         const errorData = await response.json();
         setErrorPost(errorData.message);
@@ -133,7 +134,7 @@ function HomePage() {
   };
 
   const handleLikePost = async (postId) => {
-    console.log("Like Function Called")
+    console.log("Like Function Called");
     const isLiked = Click;
     SetClick(!isLiked);
     try {
@@ -151,10 +152,8 @@ function HomePage() {
         console.log(isLiked ? "Like is clicked" : "Unlike is clicked");
         setLikeCounts((prevCounts) => ({
           ...prevCounts,
-          [postId]: isLiked ? prevCounts[postId] + 1 : prevCounts[postId] -1,
+          [postId]: isLiked ? prevCounts[postId] + 1 : prevCounts[postId] - 1,
         }));
-        
-        
       } else {
         const errorData = await response.json();
         console.error("Error while liking the post:", errorData);
@@ -173,12 +172,12 @@ function HomePage() {
     }
   }, [apiData]);
 
-
   const handleFetchComments = async (postId) => {
     try {
       const response = await fetch(
         `https://academics.newtonschool.co/api/v1/facebook/post/${postId}/comments`,
         {
+          method: "GET",
           headers: {
             Authorization: `Bearer ${bearerToken}`,
             projectID: "f104bi07c490",
@@ -189,6 +188,9 @@ function HomePage() {
         console.log("Comment is click");
         const data = await response.json();
         setComments(data.comments);
+        console.log(data);
+        
+        
       } else {
         const errorData = await response.json();
         console.error("Error while fetching comments:", errorData);
@@ -198,11 +200,45 @@ function HomePage() {
     }
   };
 
+  //for Update Comment
+
+  const createCommentForPost = async (postId, content) => {
+    try {
+      const response = await fetch(
+        `https://academics.newtonschool.co/api/v1/facebook/comment/${postId}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+            projectID: "f104bi07c490",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ content }),
+        }
+      );
+
+      if (response.ok) {
+        console.log("Comment created successfully");
+        // You may want to update the UI to show the new comment immediately
+        // For example, you can add the new comment to the `comments` state.
+        const data = await response.json();
+        setComments([...comments, data.comment]);
+      } else {
+        const errorData = await response.json();
+        console.error("Error while creating a comment:", errorData);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const handleComment = (e) => {
+    setComments(e.target.value);
+  };
+
   const imageUrls = [
     "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1147.jpg",
- 
   ];
-
 
   return (
     <div>
@@ -213,8 +249,8 @@ function HomePage() {
           {boxes.map((value) => (
             <Grid key={value} item className="gridItem">
               <Paper className="paper" onClick={handlepaperclick}>
-                  <img src={imageUrls[0]} />
-                </Paper>
+                <img src={imageUrls[0]} />
+              </Paper>
             </Grid>
           ))}
         </Grid>
@@ -257,29 +293,40 @@ function HomePage() {
             >
               <Box sx={style}>
                 <section className="createPostHeader">
-                <Typography  variant="h6" component="h2">
-                  Create a Post
-                </Typography>
-                <Divider id="createPostDivider"/>
+                  <Typography variant="h6" component="h2">
+                    Create a Post
+                  </Typography>
+                  <Divider id="createPostDivider" />
                 </section>
                 <section className="createPostAccount">
-                <Avatar />
-                <h3>name</h3>
+                  <Avatar />
+                  <h3>name</h3>
                 </section>
-                <section >
-                <textarea id="createPostBio" value={postContent} onChange={(e) => setPostContent(e.target.value)}>
-                What's on your mind, name? 
-            </textarea>
-            <input type="file" accept="image/*" style={{ display: "none" }} id="imageInput" onChange={handleImageChange}/>
+                <section>
+                  <textarea
+                    id="createPostBio"
+                    value={postContent}
+                    onChange={(e) => setPostContent(e.target.value)}
+                  >
+                    What's on your mind, name?
+                  </textarea>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    style={{ display: "none" }}
+                    id="imageInput"
+                    onChange={handleImageChange}
+                  />
                 </section>
                 <section className="createPostBar">
                   <h3>Add to your post</h3>
-                  <CollectionsIcon onClick={handleOpenImage}/>
+                  <CollectionsIcon onClick={handleOpenImage} />
                   <PlaceIcon />
-
                 </section>
                 <section>
-                  <button className="createPostBtn" onClick={handleCreatePost}>Post</button>
+                  <button className="createPostBtn" onClick={handleCreatePost}>
+                    Post
+                  </button>
                 </section>
               </Box>
             </Modal>
@@ -320,17 +367,50 @@ function HomePage() {
                 </div>
                 <div className="countComment">
                   <CommentOutlinedIcon />
-                  
+
                   <Typography>{post.commentCount}</Typography>
                 </div>
               </section>
-              <footer>
-                <section className="postButtons">
-                  <Button onClick={() => handleLikePost(post._id)} startIcon={<ThumbUpOutlinedIcon />}>Like</Button>
-                  <Button onClick={() => handleFetchComments(post._id)} startIcon={<CommentOutlinedIcon />}>Comment</Button>
-                  <Button>Send</Button>
-                </section>
-              </footer>
+              <Divider />
+
+              <section className="postButtons">
+                <Button
+                  onClick={() => handleLikePost(post._id)}
+                  startIcon={<ThumbUpOutlinedIcon />}
+                >
+                  Like
+                </Button>
+                <Button
+                  onClick={() => handleFetchComments(post._id)}
+                  startIcon={<CommentOutlinedIcon />}
+                >
+                  Comment
+                </Button>
+                <Button>Send</Button>
+              </section>
+
+              <Divider />
+
+              <section className="PostComment">
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Write a comment..."
+                    value={comments}
+                    onChange={handleComment}
+                  />
+                  <button
+                    onClick={() => createCommentForPost(post._id, comments)}
+                  >
+                    <SendIcon />
+                  </button>
+                </div>
+                <div className="commentsSection">
+                  <h3>its Comment</h3>
+                  
+                 
+                </div>
+              </section>
             </Box>
           ))}
       </section>
@@ -338,5 +418,3 @@ function HomePage() {
   );
 }
 export default HomePage;
-
- 
