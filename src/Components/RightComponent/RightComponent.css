@@ -1,0 +1,22 @@
+.right-sidebar {
+    /* margin-top: -21em; */
+    position: relative;
+    width: 20%;
+    /* background-color: red; */
+    height: 100vh;
+    position: absolute;
+    right: 2em;
+    position: fixed;
+    margin-top: 0px;
+}
+.widgets {
+ height: 100vh;
+}
+@media(max-width: 900px){
+    .right-sidebar{
+        display: none;
+    }
+    .widgets{
+        display: none;
+    }
+}

@@ -24,6 +24,9 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import ListItemButton from "@mui/material/ListItemButton";
+import Avatar from "@mui/material/Avatar";
+import EmojiFlagsRoundedIcon from '@mui/icons-material/EmojiFlagsRounded';
+
 import { useAuth } from "../Context/Context";
 import {
   BrowserRouter,
@@ -36,6 +39,7 @@ import {
 import Divider from "@mui/material/Divider";
 
 import "./nav.css";
+import { userMap } from "../Datastoar";
 
 
 
@@ -186,9 +190,17 @@ export default function Navbar() {
   const handleInputChange = (e) => {
     setSearchQuery(e.target.value);
   };
+  const userIdForNav = localStorage.getItem("userId");
+  // const [userName, setUserName] = useState("");
+  // useEffect(() => {
+  //   const storedUserName = localStorage.getItem("userName");
+  //   if (storedUserName) {
+  //     setUserName(storedUserName);
+  //   }
+  // }, []);
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar className="navAppBar" style={{ backgroundColor: 'white' }} position="static">
+    <Box sx={{ flexGrow: 1 }} className="navBarParrentBox">
+      <AppBar className="navAppBar" style={{ backgroundColor: 'white' }} >
         <Toolbar>
           <Box className="logoFacebook">
             <NavLink
@@ -206,6 +218,7 @@ export default function Navbar() {
             </NavLink>
           </Box>
           <section className="responsiveSection">
+            <section className="searchComponent">
           <Search className="search-Bar">
             <SearchIconWrapper>
               <SearchIcon />
@@ -223,21 +236,34 @@ export default function Navbar() {
               }}
             />
           </Search>
+          </section>
           <div className="header_center">
                 <div className="header_option header_option--active">
+                  <Link className="linkIcon" to={"/Main"}>
                     <HomeIcon fontSize="large" />
+                    </Link>
                 </div>
+                
                 <div className="header_option">
+                <Link className="linkIcon" to={"/commingSoon"}>
                     <FlagIcon fontSize="large" />
+                    </Link>
                 </div>
+                
                 <div className="header_option">
+                <Link className="linkIcon" to={"/commingSoon"}>
                     <SubscriptionsIcon fontSize="large"/>
+                    </Link>
                 </div>
                 <div className="header_option">
+                <Link className="linkIcon" to={"/commingSoon"}>
                     <StorefrontOutlined fontSize="large"/>
+                    </Link>
                 </div>
                 <div className="header_option">
+                <Link className="linkIcon" to={"/commingSoon"}>
                     <SupervisedUserCircle fontSize="large"/>
+                    </Link>
                 </div>
             </div>
             </section>
@@ -249,7 +275,7 @@ export default function Navbar() {
               color="#0866FF"
             >
               <Badge badgeContent={4} color="error">
-                <MailIcon />
+                <MailIcon className="mailIconNav" />
               </Badge>
             </IconButton>
             <IconButton
@@ -258,7 +284,7 @@ export default function Navbar() {
               color="#0866FF"
             >
               <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
+                <NotificationsIcon className="notificationIconNav"/>
               </Badge>
             </IconButton>
             <IconButton
@@ -270,7 +296,9 @@ export default function Navbar() {
               onClick={handleOpen}
               color="#0866FF"
             >
-              <AccountCircle />
+              {userMap.get(userIdForNav) && (
+                            <Avatar sx={{ width: 35, height: 35 }} src={userMap.get(userIdForNav)?.photo}></Avatar>
+                            )}
             </IconButton>
 
             <section className="modalSection">
@@ -288,8 +316,11 @@ export default function Navbar() {
                         <ListItemButton>
                           <Link to={"/profile"} className="black-link">
                           <div className="acountData">
-                            <AccountCircle />
-                            <Typography>Name</Typography>
+                          {userMap.get(userIdForNav) && (
+                            <Avatar sx={{ width: 30, height: 30 }} src={userMap.get(userIdForNav)?.photo}></Avatar>
+                            )}
+                            <Typography>{userMap.get(userIdForNav)?.name}</Typography>
+                           
                           </div>
                           </Link>
                         </ListItemButton>
@@ -319,7 +350,7 @@ export default function Navbar() {
                       <div className="listItemProfile">
                       <Link to={"/createPage"}className="black-link">
                         <ListItemButton>
-                          <HelpIcon />
+                          <EmojiFlagsRoundedIcon />
                           <Typography
                             id="modal-modal-title"
                             variant="h6"
@@ -347,7 +378,7 @@ export default function Navbar() {
                         
                       </div>
                       <div className="listItemProfile">
-                        <Link to={"/updatePassword"}>
+                        <Link to={"/updatePassword"} className="black-link">
                         <ListItemButton>
                           <FeedbackRoundedIcon />
                           <Typography

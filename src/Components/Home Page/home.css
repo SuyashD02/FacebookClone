@@ -1,17 +1,34 @@
-.gridBox {
-    margin-top: 50px;  
-  }
+.homePage{
+  background-color: #f0f2f5;
+  margin-top: 80px;
+}
+
   
   .paper {
     position: relative;
     height: 200px;
     width: 130px;
+    margin-left: 10px;
+    box-shadow: 1px 2px 5px black !important;
+    border-radius: 5px !important;
+    margin-top: 30px;
+  }
+  .imgStory {
+    width: 100%;
+    height: 100%;
+     object-fit: cover;
+    border-radius: 5px;
+  }
+  .userProfileName{
+    color: black;
+  text-decoration: none;
   }
 
   .searchBox{
    
     border: 2px solid black;
     box-shadow: 1px 2px 5px black;
+    background-color: white;
     width: 24em;
     height: 14vh;
     margin-top: 10%;
@@ -30,16 +47,26 @@
   }
   .searchInputpost{
     color: inherit;
+    display: flex;
+    align-items: center;
     width: 80%;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 20px;
+    background-color: #f0f2f5;
     
+    
+  }
+  .searchInputUser{
+   
+    width: 80%;
+    margin-left: 10px;
   }
   .postBox{
     border: 2px solid black;
     box-shadow: 1px 2px 5px black;
+    background-color: white;
     width: 24em;
-    height: 95%;
+    height: 98%;
     margin-top: 10%;
     border: none;
     border-radius: 5px;
@@ -68,10 +95,13 @@
     justify-content: space-around;
     margin-top: 5px;
   }
+  #likeDevider{
+    margin-top: 10px;
+  }
   .postButtons{
     display: flex;
-    justify-content: space-around;
-  margin-top: 10px;
+    justify-content:space-around;
+  margin-top: 5px;
   }
   .createPostAccount{
     display: flex;
@@ -109,12 +139,14 @@
     display: flex;
     gap: 10px;
     margin-left: 10px;
+    margin-top: 10px;
   }
 
   .countComment{
     display: flex;
     gap: 10px;
     margin-left: 10px;
+    margin-top: 10px;
   }
   .captionForPost{
     margin-top: 5px;
@@ -123,3 +155,83 @@
   #captionPost{
     font-size: small;
   }
+  .commentInputDiv{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  #inputBoxComment{
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  .commentsSection{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  #headingComment{
+    color: gray;
+   
+  }
+  .commentData{
+    
+    height: 200px; 
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc; 
+    
+  }
+  .comment{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+    font-weight: normal;
+    
+    height: 12vh;
+    border-radius: 5px;
+    border: 1px solid #ccc; 
+   
+  }
+  .CommentAuthor{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    margin-left: 10px;
+    margin-top: 5px;
+  }
+  .commentH3{
+    font-size: 18px;
+    font-weight: normal;
+    margin-left: 15px;
+  }
+  .editCommetSection{
+    margin-left: 40%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  .editCommentDiv{
+    margin-left: 10px;
+    display: flex;
+    gap: 5px;
+  }
+  .editIconComment{
+    color: gray;
+    cursor: pointer;
+  }
+  .deleteIconComment{
+    color: gray;
+    cursor: pointer;
+
+  }
+#inputBoxCommentEdit{
+  width: 70%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}

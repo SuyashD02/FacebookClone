@@ -1,0 +1,66 @@
+.left-sidebar {
+    /* margin-top: -21em; */
+    position: relative;
+    width: 22%;
+    /* background-color: red; */
+    height: 100vh;
+    position: absolute;
+    left: 1em;
+    position: fixed;
+    margin-top: 0px;
+}
+#nameLeftBar{
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+    gap: 15px;
+    font-size: 18px;
+    font-style: normal;
+}
+#covidInfoLeftBar{
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+    gap: 15px;
+    font-size: 18px;
+    font-style: normal;
+    
+}
+#pagesLeftBar{
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+    gap: 15px;
+    font-size: 18px;
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+}
+#friendsLeftBar{
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+    gap: 15px;
+    font-size: 18px;
+    font-style: normal;
+}
+#messangerLeftBar{
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+    gap: 15px;
+    font-size: 18px;
+    font-style: normal;
+}
+.leftIcon{
+    color: #2e81f4;
+}
+.leftUserName{
+    color: black;
+  text-decoration: none;
+}
+@media(max-width: 1100px){
+    .left-sidebar{
+        display: none;
+    }
+}

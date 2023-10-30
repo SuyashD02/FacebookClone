@@ -8,9 +8,10 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [apiSearch, setApiSearchData] = useState([]);
+  const [postUserId, setPostuserId] = useState("");
 
   return (
-    <AuthContext.Provider value={{setApiSearchData,apiSearch }}>
+    <AuthContext.Provider value={{setApiSearchData,apiSearch,postUserId, setPostuserId }}>
       {children}
     </AuthContext.Provider>
   );

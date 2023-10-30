@@ -1,19 +1,20 @@
-import React,{useEffect,useState}from "react";
+import React,{useEffect,useState} from "react";
 import Navbar from "../Nav/Navbar";
 import Avatar from "@mui/material/Avatar";
-import "./myProfile.css";
+
 import { userMap } from "../Datastoar";
+import { useAuth } from "../Context/Context";
 
 
-function MyProfile(){
+function UserProfile(){
 
-    const [userProfile, setUserProfile] = useState(null);
+    const [userProfile, setUserProfile] = useState("");
     const bearerToken = localStorage.getItem("token");
-    const userId = localStorage.getItem("userId");
+    const {postUserId} = useAuth();
 
     const fetchData = async () => {
         const response = await fetch(
-          `https://academics.newtonschool.co/api/v1/facebook/user/${userId}`,
+          `https://academics.newtonschool.co/api/v1/facebook/user/${postUserId}`,
           {
             method:"Get",
             headers: {
@@ -24,11 +25,11 @@ function MyProfile(){
         );
         const data = await response.json();
         setUserProfile(data.data);
-        console.log("profile Data", data);
+        console.log("User profile Data", data);
       };
 
       useEffect(() => {
-        fetchData("userId");
+        fetchData();
       }, []);
     return(
         <div >
@@ -36,14 +37,14 @@ function MyProfile(){
             <section className="myProfileContent">
             <section className="profileHeader">
             <section className="profileImage">
-                <img id="profileimg" src={userMap.get(userId)?.photo} alt="user Image"/>
+                <img id="profileimg" src={userProfile?.profileImage} alt="user Image"/>
             </section>
             <section className="profileAvtar">
                 <div className="profileAvtarDiv">
             <section className="avtarProfile">
-            {userMap.get(userId) && (
-                            <Avatar sx={{ width: 135, height: 135 }} src={userMap.get(userId)?.photo}></Avatar>
-                            )}
+            
+                            <Avatar sx={{ width: 135, height: 135 }} src={userProfile?.profileImage}></Avatar>
+                           
            </section>
             
             <section>
@@ -64,4 +65,4 @@ function MyProfile(){
     )
 }
 
-export default MyProfile;
+export default UserProfile;

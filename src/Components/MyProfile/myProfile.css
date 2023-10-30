@@ -1,16 +1,60 @@
 .profileHeader{
-    background-color: #ececec;
-
-}
-.profileImage{
+    background-color: white;
+    height: 80vh;
+    margin-top: 0px;
+    box-shadow: 0px 1px 2px black;
     display: flex;
     justify-content: center;
-    height: 35vh;
+    align-items: center;
+    flex-direction: column;
+
+}
+.myProfileContent{
+    background-color: #f0f2f5;
+    height: 100vh;
+    margin-top: 4px;
+}
+#profileimg{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    object-fit: cover;
+    
+    border: none;
+    border-radius: 8px;
+    
+}
+.profileImage{
+  
+    width: 70vw;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
     
 }
 .profileAvtar{
+   
+    width: 70vw;
+
+}
+.profileAvtarDiv{
     display: flex;
-    justify-content:center;
-    gap: 50px;
-    margin-top: 10px;
+    margin-left: 2em;
+    gap: 30px;
+    align-items: center;
+    
+}
+.avtarProfile{
+    margin-top: -60px;
+    width: 150px; /* Width of the circular container */
+  height: 150px; /* Height of the circular container */
+  background-color: white; /* White background color for the circle */
+  border-radius: 50%; /* Make the container circular */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.userProfileName{
+    font-size: 30px;
 }

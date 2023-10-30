@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState ,useE } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import { useAuth } from "../Context/Context";
+import { userMap } from "../Datastoar";
 
 
 export default function LoginPage() {
@@ -12,6 +13,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [correctCredential,setCorrectCredential]=useState(false);
   const navigate = useNavigate();
   const {setToken}=useAuth();
 
@@ -45,9 +47,22 @@ export default function LoginPage() {
       if (response.ok) {
         console.log("Successfully logged in");
         const data = await response.json();
-        console.log("Login Data:", data);
+        console.log(data);
 
         localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.data._id);
+        localStorage.setItem("userName",data.data.name);
+        if(userMap.has(data.data._id)==false){
+          console.log("user Value is not found in map");
+        userMap.set(data.data._id,{"name":data.data.name,"photo":"https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/995.jpg"})
+        }
+        // localStorage.setItem("userData",userMap);
+        // Map p =localStorage.getItem("userData");
+        // console.log(p);
+
+        
+        
+        console.log(userMap.get("65296bb6a1ea4d2294755723"));
         
         console.log(data.token);
         setIsLoggedIn(true);
@@ -55,6 +70,7 @@ export default function LoginPage() {
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message);
+        setCorrectCredential(true);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -79,6 +95,7 @@ export default function LoginPage() {
           
           <Box className="inputSection">
             <div className="input">
+              <p style={{display:!correctCredential?"none":"",color:"red",textAlign:"center"}}>Wrong Email or Password</p>
               <input
                 type="email"
                 id="emailInput"

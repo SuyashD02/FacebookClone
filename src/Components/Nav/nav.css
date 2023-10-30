@@ -3,6 +3,12 @@
     color: white;
     border: 0;
   }
+  .navBarParrentBox{
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    margin-top: 0px;
+  }
   
   .active-link {
     text-decoration: none;
@@ -11,6 +17,7 @@
   }
 .navAppBar{
   background-color: white;
+  box-shadow: 0px 1px 5px black;
 }
 
   /*Search Bar*/
@@ -18,14 +25,30 @@
     width: 15%;
     background-color: lightgray;
   }
+  .mailIconNav{
+    background-color:lightgray;
+    border-radius: 50%;
+    height: 35px !important;
+    width: 35px !important;
+    padding: 8px;
+  }
+  .notificationIconNav{
+    background-color:lightgray;
+    border-radius: 50%;
+    height: 35px !important;
+    width: 35px !important;
+    padding: 8px;
+  }
 
   /*Modal Box */
   .modalBox{
     border: 2px solid black;
     height: 65vh;
     width: 22em;
-    margin: 0px 20px 0px 0px;
+    margin: -30px 20px 0px 0px;
     background-color: white;
+    border-radius: 8px;
+    box-shadow: 1px 1px 8px black;
   }
   .boxUser{
     border: 2px solid black;
@@ -56,8 +79,10 @@
   }
   .header_center {
     display: flex;
-    flex: 1;
-    justify-content: center;
+    flex-direction: row;
+   
+    gap: 50px;
+    width: 80%;
 }
 .header_option >.MuiSvgIcon-root{
   color: grey;
@@ -77,8 +102,7 @@
 
 .header_option {
   display: flex;
-  align-items: center;
-  padding: 0 30px;
+
   cursor: pointer;
 }
 
@@ -86,35 +110,47 @@
   background-color: #eff2f5;
   border-radius: 10px;
   align-items: center;
-  padding: 0 30px;
   border-bottom: 0;
 }
 .responsiveSection{
   display: flex;
   gap: 10px;
+  width: 100%;
+ 
 }
 .black-link{
   color: black;
   text-decoration: none;
 }
-@media(max-width: 400px){
+.linkIcon{
+  color: #2e81f4;
+}
+@media(max-width: 600px){
+  .navAppBar{
+    display: flex;
+    flex-direction: row;
+  }
   .responsiveSection{
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
+  
   .search-Bar{
     width: 63%;
   }
   .seachInput{
     width: 300px;
-    margin-left: -10px;
+    margin-left: 0px;
   }
-  .header_center{
-    width: 100px;
-    margin-left:130px;
-    padding: 0px;
-  }
+  .header_center {
+    display: flex;
+    flex-direction: row;
+    
+    justify-content: center;
+    gap: 5%;
+    width: 100%;
+}
   .header_option {
     display: flex;
     align-items: center;
@@ -123,3 +159,4 @@
     
 }
 }
+
