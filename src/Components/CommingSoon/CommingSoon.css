@@ -1,0 +1,13 @@
+.commingSoon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    margin-top: 50vh;
+    height: 10vh;
+    font-size:20px;
+}
+.commingSoonH2{
+    font-weight: 1000;
+
+}

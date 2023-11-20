@@ -269,24 +269,28 @@ export default function Navbar() {
             </section>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Link to="/commingSoon">
             <IconButton
               size="large"
               aria-label="show 4 new mails"
               color="#0866FF"
             >
-              <Badge badgeContent={4} color="error">
+              <Badge>
                 <MailIcon className="mailIconNav" />
               </Badge>
             </IconButton>
+            </Link>
+            <Link to="/commingSoon">
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="#0866FF"
             >
-              <Badge badgeContent={17} color="error">
+              <Badge>
                 <NotificationsIcon className="notificationIconNav"/>
               </Badge>
             </IconButton>
+            </Link>
             <IconButton
               size="large"
               edge="end"

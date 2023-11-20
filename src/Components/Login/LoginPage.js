@@ -28,6 +28,7 @@ export default function LoginPage() {
   }
 
   async function handleLoginClick() {
+    
     try {
       const response = await fetch(
         "https://academics.newtonschool.co/api/v1/user/login",
@@ -47,13 +48,13 @@ export default function LoginPage() {
       if (response.ok) {
         console.log("Successfully logged in");
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
 
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.data._id);
         localStorage.setItem("userName",data.data.name);
         if(userMap.has(data.data._id)==false){
-          console.log("user Value is not found in map");
+          // console.log("user Value is not found in map");
         userMap.set(data.data._id,{"name":data.data.name,"photo":"https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/995.jpg"})
         }
         // localStorage.setItem("userData",userMap);
@@ -62,9 +63,9 @@ export default function LoginPage() {
 
         
         
-        console.log(userMap.get("65296bb6a1ea4d2294755723"));
+        // console.log(userMap.get("65296bb6a1ea4d2294755723"));
         
-        console.log(data.token);
+        // console.log(data.token);
         setIsLoggedIn(true);
         navigate("/Main");
       } else {
@@ -84,10 +85,12 @@ export default function LoginPage() {
     <div className="login">
       <div className="left-Content">
         <div className="login-left">
+          <div className="loginLeftContent">
           <h1 id="loginHeading">Facebook</h1>
           <p id="login-para">
             Facebook helps you connect and share with the people in your life.
           </p>
+          </div>
         </div>
       </div>
       <div className="right-Content">
@@ -95,7 +98,7 @@ export default function LoginPage() {
           
           <Box className="inputSection">
             <div className="input">
-              <p style={{display:!correctCredential?"none":"",color:"red",textAlign:"center"}}>Wrong Email or Password</p>
+              <p style={{display:!correctCredential?"none":"",color:"red",textAlign:"center"}}>{errorMessage}</p>
               <input
                 type="email"
                 id="emailInput"

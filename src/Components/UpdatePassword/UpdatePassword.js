@@ -33,101 +33,6 @@ function UpdatePassword(){
         setFirstName(firstNameSet);
       }
 
-      {/*async function makeAPICall() {
-
-        console.log("update called");
-        
-        ///Anurag////
-        
-        const loginresponse = await fetch(
-        
-        'https://academics.newtonschool.co/api/v1/user/login',
-        
-        {
-        
-        method: "POST",
-        
-        headers: {
-        
-        projectId: "f104bi07c490",
-        
-        "Content-Type": "application/json",
-        
-        },
-        
-        body: JSON.stringify({
-        
-        email: "rohan@gmail.com",
-        
-        password: "rohan",
-        
-        appType: "facebook",
-        
-        })
-        
-        });
-        
-        const loginjson = await loginresponse.json();
-        
-        console.log(loginjson);
-        setBearerToken(loginjson.token);
-        const token = loginjson.token;
-        console.log("bearer token after successful login "+getBearerToken());
-        
-        //////
-        
-        //const token = getBearerToken();
-        
-        
-        console.log("token in starting in update " + token);
-        
-        const response = await fetch(
-        
-        'https://academics.newtonschool.co/api/v1/user/updateMyPassword',
-        
-        {
-        
-        method: "PATCH",
-        
-        headers: {
-        
-        projectId: "f104bi07c490",
-        
-        "Content-Type": "application/json",
-        
-        Authorization: `Bearer ${token}`,
-        
-        },
-        
-        body: JSON.stringify({
-        
-        name: "rohan",
-        
-        email: mail,
-        
-        passwordCurrent: currentPassword,
-        
-        password: newPassword,
-        
-        appType: "facebook",
-        
-        })
-        
-        });
-        
-        //console.log(response);
-        
-        const json = await response.json();
-        
-        console.log(json);
-        
-        console.log("token after update call " +json.token);
-        
-        }*/}
-
-
-
-
       async function handleUpdate() {
         console.log("Function is called");
         try {
@@ -151,8 +56,8 @@ function UpdatePassword(){
             }
           );
           const json = await response.json();
-          console.log(json);
-          console.log("token after update call " +json.token)
+          // console.log(json);
+          // console.log("token after update call " +json.token)
           if (response.ok) {
             console.log("Succecfully Updated Password");
             localStorage.removeItem("token");

@@ -4,6 +4,7 @@ import Avatar from "@mui/material/Avatar";
 
 import { userMap } from "../Datastoar";
 import { useAuth } from "../Context/Context";
+import { Box } from "@mui/material";
 
 
 function UserProfile(){
@@ -34,7 +35,11 @@ function UserProfile(){
     return(
         <div >
             <Navbar />
+
+          
+            <Box >
             <section className="myProfileContent">
+            
             <section className="profileHeader">
             <section className="profileImage">
                 <img id="profileimg" src={userProfile?.profileImage} alt="user Image"/>
@@ -59,7 +64,26 @@ function UserProfile(){
             </section>
 
             </section>
+            <section className="">
+              <h3>Intro</h3>
+                <div>
+                  {/* <h3>{userProfile?.education}</h3> */}
+                </div>
+                <div>
+                <h3>{userProfile?.email}</h3>
+                </div>
+                <div>
+                  {/* <h3>{userProfile?.workExperience}</h3> */}
+                </div>
+                <div>
+
+                </div>
+
             </section>
+            
+            </section>
+            </Box>
+           
             
         </div>
     )

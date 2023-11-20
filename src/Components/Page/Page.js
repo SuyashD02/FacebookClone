@@ -32,7 +32,7 @@ function Page() {
       if (response.ok) {
         console.log("Succecfully SignUp");
         const data = await response.json();
-        console.log("CreatePage Data:", data);
+        // console.log("CreatePage Data:", data);
         navigate("//createPage/page")
 
       } else {

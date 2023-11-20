@@ -24,7 +24,7 @@ function MyProfile(){
         );
         const data = await response.json();
         setUserProfile(data.data);
-        console.log("profile Data", data);
+        // console.log("profile Data", data);
       };
 
       useEffect(() => {

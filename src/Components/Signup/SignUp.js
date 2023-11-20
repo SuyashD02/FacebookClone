@@ -14,7 +14,9 @@ function SignUp() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLasttName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [correctCredential,setCorrectCredential]=useState(false);
   const navigate = useNavigate();
+  const emailPattern = /^\S+@\S+\.\S+$/;
 
   function mailInput(e) {
     const mailSet = e.target.value;
@@ -37,6 +39,22 @@ function SignUp() {
 
   async function handleSignup() {
     console.log("Function is called");
+    if (!firstName) {
+      setCorrectCredential(false);
+      setErrorMessage("First name is required.");
+      return;
+    }
+    if (!mail || !password) {
+      setCorrectCredential(false);
+      setErrorMessage("Email and Password are required.");
+      return;
+    }
+    
+    if (!emailPattern.test(mail)) {
+      setCorrectCredential(false);
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
     try {
       const response = await fetch(
         "https://academics.newtonschool.co/api/v1/user/signup",
@@ -54,12 +72,17 @@ function SignUp() {
           }),
         }
       );
-      if (response.ok) {
+      if (response.status === 403) {
+        setCorrectCredential(false);
+        setErrorMessage("Email is already registered. Please go and log in instead.");
+      }
+        else if (response.ok) {
         console.log("Succecfully SignUp");
         navigate("/");
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message);
+        setCorrectCredential(true);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -103,6 +126,8 @@ function SignUp() {
               <h5 id="signuph5">It's quick and easy</h5>
             </section>
             <Divider id="signupDivider" />
+            <p className="errorDisplay" style={{display:correctCredential?"none":"",color:"red",textAlign:"center"}}>{errorMessage}</p>
+
             <section className="signupName">
               <input
                 type="text"
@@ -116,7 +141,7 @@ function SignUp() {
                 id="last-Name"
                 value={lastName}
                 onChange={lastNameInput}
-                placeholder="Surname"
+                placeholder="Last name"
               />
             </section>
             <section className="signupMail">
@@ -127,6 +152,7 @@ function SignUp() {
                 onChange={mailInput}
                 placeholder="Email address"
               />
+              
               <input
                 type="password"
                 id="signupNew-Password"
@@ -134,6 +160,7 @@ function SignUp() {
                 onChange={passwordInput}
                 placeholder="New password"
               />
+              
             </section>
             <section className="signupDate">
               <h3 id="dateh3">Date of birth</h3>
@@ -388,11 +415,6 @@ function SignUp() {
               </section>
               <section className="signupBtnSection">
                 <button className="signupBtn" onClick={handleSignup}>Sign Up</button>
-              </section>
-              <section className="signupLinkBtnSection">
-                <Link to="/">
-                  <h3 id="signupLinkbtn">Already have an account?</h3>
-                </Link>
               </section>
             </section>
           </div>

@@ -1,8 +1,9 @@
 import React from "react";
+import "./CommingSoon.css"
 function CommingSoon(){
     return(
-        <div>
-            <h2>Comming Soon !!</h2>
+        <div className="commingSoon">
+            <h2 className="commingSoonH2">Coming Soon !!</h2>
         </div>
     )
 }

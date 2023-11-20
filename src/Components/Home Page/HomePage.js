@@ -74,7 +74,7 @@ function HomePage() {
       }
     );
     const r = await response.json();
-    console.log(r);
+    // console.log(r);
     setApiData(r["data"]);
   };
 
@@ -128,7 +128,7 @@ function HomePage() {
         console.log("Succecfully Posted");
         const data = await response.json();
 
-        console.log("Post Data:", data);
+        // console.log("Post Data:", data);
         fetchData();
       } else {
         const errorData = await response.json();
@@ -235,7 +235,7 @@ function HomePage() {
       if (response.ok) {
         console.log("Comment is click");
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         const commentsWithUsernames = data.data.map((comment) => ({
           ...comment,
           authorName: userMap.get(comment.author)?.name,
