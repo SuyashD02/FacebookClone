@@ -58,6 +58,30 @@ function MyProfile(){
             </section>
 
             </section>
+            <section className="boxIntroUser">
+              <h3>Intro</h3>
+                <div>
+                  {userProfile?.education &&
+                  userProfile.education.map((edu,index)=>(
+                    <div className="introEducation" key={index}>
+                      <h3><img src="https://static.xx.fbcdn.net/rsrc.php/v3/yG/r/H804hWf2rBh.png"/>School:{edu.schoolName}</h3>
+                      <p>Degree{edu.degree}</p>
+                      <p>End Date:{edu.endDate}</p>
+                    </div>
+                  ))
+                  }
+                </div>
+                <div>
+                <h3>{userProfile?.email}</h3>
+                </div>
+                <div>
+                  {/* <h3>{userProfile?.workExperience}</h3> */}
+                </div>
+                <div>
+
+                </div>
+
+            </section>
             </section>
             
         </div>

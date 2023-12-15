@@ -74,7 +74,7 @@ function HomePage() {
       }
     );
     const r = await response.json();
-    // console.log(r);
+    console.log(r);
     setApiData(r["data"]);
   };
 

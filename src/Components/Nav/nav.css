@@ -42,7 +42,7 @@
 
   /*Modal Box */
   .modalBox{
-    border: 2px solid black;
+    
     height: 65vh;
     width: 22em;
     margin: -30px 20px 0px 0px;
@@ -51,12 +51,9 @@
     box-shadow: 1px 1px 8px black;
   }
   .boxUser{
-    border: 2px solid black;
-    box-shadow: 1px 2px 5px black;
-    margin: 10px 20px 0px 20px;
-    height: 70px;
+  /* margin-top: 10px; */
+    height: 75px;
     border: none;
-    border-radius: 5px;
   }
   .modalAcountIcon{
     display: grid;
@@ -70,12 +67,46 @@
     margin-left: 10px;
   
   }
-  .seeAllListButton{
-    height: 27px; 
+  .displayIcon{
+    width: 40px; /* Width of the circular container */
+    height: 40px; /* Height of the circular container */
+    background-color: #e4e6eb; /* White background color for the circle */
+    border-radius: 50%; /* Make the container circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
   }
+  .iconSetDisplay{
+    width: 25px; /* Width of the circular container */
+    height: 25px; /* Height of the circular container */
+    background-color: #e4e6eb; /* White background color for the circle */
+    border-radius: 50%; /* Make the container circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  .iconDisplay{
+    margin-top: -161px;
+    margin-left: 7px;
+    width: 25px;
+  }
+  .seeAllListButton{
+    height: 27px;
+    display: flex;
+    align-items: center; 
+  }
+
   .listItemProfile{
     margin: 12px 10px 0px 10px;
     border-radius: 5px;
+   
+  }
+  .listButons{
+    display: flex;
+    gap: 5px;
+    align-items: center;
   }
   .header_center {
     display: flex;
@@ -158,5 +189,10 @@
     cursor: pointer;
     
 }
+}
+
+.horizantalLine{
+ 
+  border:1px solid black;
 }
 

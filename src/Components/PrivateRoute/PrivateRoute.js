@@ -5,4 +5,4 @@ function PrivateRoute(){
         token ? <Outlet/> :<Navigate to={"/"}/>
     )
 }
-export default PrivateRoute;
+export default PrivateRoute; 

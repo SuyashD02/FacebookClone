@@ -54,18 +54,10 @@ export default function LoginPage() {
         localStorage.setItem("userId", data.data._id);
         localStorage.setItem("userName",data.data.name);
         if(userMap.has(data.data._id)==false){
-          // console.log("user Value is not found in map");
+         
         userMap.set(data.data._id,{"name":data.data.name,"photo":"https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/995.jpg"})
         }
-        // localStorage.setItem("userData",userMap);
-        // Map p =localStorage.getItem("userData");
-        // console.log(p);
-
         
-        
-        // console.log(userMap.get("65296bb6a1ea4d2294755723"));
-        
-        // console.log(data.token);
         setIsLoggedIn(true);
         navigate("/Main");
       } else {

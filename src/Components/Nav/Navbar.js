@@ -81,7 +81,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar() {
+export default function Navbar({onNavClick}) {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [open, setOpen] = React.useState(false);
@@ -206,6 +206,7 @@ export default function Navbar() {
             <NavLink
               className={({ isActive }) => (isActive ? "active-link" : "link")}
               to="/Main"
+              onClick={()=>onNavClick()}
             >
               <Typography
                 variant="h6"
@@ -317,30 +318,33 @@ export default function Navbar() {
                   <Box className="modalBox">
                     <div>
                       <Box className="boxUser">
+                        <div className="authorName">
                         <ListItemButton>
                           <Link to={"/profile"} className="black-link">
                           <div className="acountData">
                           {userMap.get(userIdForNav) && (
-                            <Avatar sx={{ width: 30, height: 30 }} src={userMap.get(userIdForNav)?.photo}></Avatar>
+                            <Avatar sx={{ width: 40, height: 40 }} src={userMap.get(userIdForNav)?.photo}></Avatar>
                             )}
-                            <Typography>{userMap.get(userIdForNav)?.name}</Typography>
+                            <h2>{userMap.get(userIdForNav)?.name}</h2>
                            
                           </div>
                           </Link>
                         </ListItemButton>
-                        <Divider />
-                        <ListItemButton className="seeAllListButton">
-                          <div className="SeeAll">
-                            <Typography>See all profile</Typography>
-                          </div>
-                        </ListItemButton>
+                        </div>
+                        
                       </Box>
                     </div>
+                    <hr className="horizantalLine"></hr>
 
                     <div className="modalList">
                       <div className="listItemProfile">
-                        <ListItemButton>
-                          <Settings />
+                        <ListItemButton className="listButons">
+                          
+                          <div className="displayIcon">
+                            <div className="iconSetDisplay">
+                            <Settings />
+                              </div>
+                              </div>
                           <Typography
                             id="modal-modal-title"
                             variant="h6"
@@ -353,8 +357,12 @@ export default function Navbar() {
                       </div>
                       <div className="listItemProfile">
                       <Link to={"/createPage"}className="black-link">
-                        <ListItemButton>
-                          <EmojiFlagsRoundedIcon />
+                        <ListItemButton className="listButons">
+                        <div className="displayIcon">
+                            <div className="iconSetDisplay">
+                            <EmojiFlagsRoundedIcon />
+                              </div>
+                              </div>
                           <Typography
                             id="modal-modal-title"
                             variant="h6"
@@ -368,7 +376,17 @@ export default function Navbar() {
                       </div>
                       <div className="listItemProfile">
                        
-                        <ListItemButton>
+                        <ListItemButton className="listButons">
+                          <div className="displayIcon">
+                            <div className="iconSetDisplay">
+                            <img 
+                            className="iconDisplay"
+                            src="https://static.xx.fbcdn.net/rsrc.php/v3/yN/r/wZov-fr9UUc.png"
+                            alt="display"
+                            />
+
+                            </div>
+                          </div>
                           <Typography
                             id="modal-modal-title"
                             variant="h6"
@@ -383,8 +401,13 @@ export default function Navbar() {
                       </div>
                       <div className="listItemProfile">
                         <Link to={"/updatePassword"} className="black-link">
-                        <ListItemButton>
-                          <FeedbackRoundedIcon />
+                        <ListItemButton className="listButons">
+                          
+                          <div className="displayIcon">
+                            <div className="iconSetDisplay">
+                            <FeedbackRoundedIcon />
+                              </div>
+                              </div>
                           <Typography
                             id="modal-modal-title"
                             variant="h6"
@@ -401,8 +424,12 @@ export default function Navbar() {
                         onClick={habdleLoginLogout}
                       >
                         <Link to="/"className="black-link">
-                        <ListItemButton>
-                          <Logout />
+                        <ListItemButton className="listButons"> 
+                          <div className="displayIcon">
+                            <div className="iconSetDisplay">
+                            <Logout />
+                              </div>
+                              </div>
                           <Typography
                             id="modal-modal-title"
                             variant="h6"
