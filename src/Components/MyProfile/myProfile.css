@@ -9,6 +9,9 @@
     flex-direction: column;
 
 }
+
+/* Profile Section */
+
 .myProfileContent{
     background-color: #f0f2f5;
     height: 100%;
@@ -19,7 +22,6 @@
     justify-content: center;
     width: 100%;
     object-fit: cover;
-    
     border: none;
     border-radius: 8px;
     
@@ -33,9 +35,7 @@
     
 }
 .profileAvtar{
-   
     width: 70vw;
-
 }
 .profileAvtarDiv{
     display: flex;
@@ -65,11 +65,10 @@
     /* border: 2px solid greenyellow; */
 }
 .wrapAllIntro{
-   
-    width: 365px;
+    width: 95%;
 }
 .boxIntroUser{
-    border: 2px solid black;
+    
     box-shadow: 1px 2px 5px black;
     background-color: white;
     width: 33vw;
@@ -92,18 +91,17 @@
     gap: 15px;
 }
 .educationSection{
-    margin-top: 5px;
-    border: 1px solid greenyellow;
+    margin-top: 10px;
 }
 .introEducation{
-   
-    height: 10vh;
-    margin-top: 5px;
+    height: 100%;
+    margin-top: 10px;
     border-radius: 5px;
-    border: 1px solid black;
+    
 }
 .imgEducation{
-    height: 3vh;
+    height: 2.6vh; 
+    color: #65676b;
 }
 .headingEducation{
     display: flex;
@@ -117,10 +115,12 @@
 .degreeEduction{
     margin-left: 10px;
     margin-top: 2px;
+    font-size: 15px;
 }
 .endEducation{
     margin-left: 10px;
     margin-top: 2px;
+    font-size: 15px;
 }
 .contactUser{
     margin-top: 5px;
@@ -129,10 +129,16 @@
     font-weight: 600;
     font-size: 1.3rem;
 }
+.h3ContentHeaders{
+    font-size: 1.1rem;
+}
 .pTagIntro{
     display: flex;
     align-items: center;
     gap: 5px;
+    font-size: 15px;
+    margin-top: 2px;
+    margin-left: 7px;
 }
 .followUser{
     width: 100px;
@@ -143,9 +149,6 @@
     color: #fff;
     font-weight:550;
     font-size: 16px;
-}
-.addreesUser{
-    display: flex;
 }
 
 .userPostBox{
@@ -169,3 +172,76 @@
     justify-content: center;
     
   }
+  .postSectionUser::-webkit-scrollbar {
+    width: 0px;
+  }
+  .addressDiv{
+    margin-top:10px;
+  }
+  .addreesUser{
+    display: flex;
+    margin-left: 7px;
+    margin-top: 5px;
+    gap: 5px;
+    
+}
+.userAdrees{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.userCity{
+    display: flex;
+    gap: 2px;
+}
+.adreesState{
+    display: flex;
+    gap: 2px;
+}
+
+@media(max-width:600px){
+    .profileHeader{
+        margin-top: -48px;
+    
+    }
+    .profileAvtarDiv{
+        display: flex;
+        flex-direction: column;
+        margin-left: 0em;
+        gap: 10px;  
+    }
+    .profileImage{
+        width: 100vw;
+        height: 30vh;
+    }
+    #profileimg{
+        border-radius: 0px;
+    }
+    .userDataSection{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%; 
+      
+    }
+    .boxIntroUser{
+        width: 100%;
+        margin-left: 0px;
+    }
+    .postSectionUser{
+        width: 100%;
+        margin-top: 15px;
+        height:90vh;
+        align-items: center;
+        gap: 10px;
+        /* margin-bottom: 40px; */
+      }
+      .userPostBox{
+        width: 100%;
+        height: 100%;
+      }
+      .imgPost{
+        width: 100%;;
+      }
+      
+}

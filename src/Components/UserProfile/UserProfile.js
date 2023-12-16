@@ -10,7 +10,8 @@ import SendIcon from "@mui/icons-material/Send";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EmailIcon from '@mui/icons-material/Email';
-
+import HomeIcon from '@mui/icons-material/Home';
+import SchoolIcon from '@mui/icons-material/School';
 import { Link } from "react-router-dom";
 import { userMap } from "../Datastoar";
 import { useAuth } from "../Context/Context";
@@ -39,7 +40,7 @@ function UserProfile() {
       );
       const data = await response.json();
       setUserProfile(data.data);
-      console.log(data);
+      // console.log(data);
       setUserName(data.data.name);
     } catch (error) {
       console.error("Error fetching user profile:", error);
@@ -60,7 +61,7 @@ function UserProfile() {
       );
       const postData = await response.json();
       setUserPosts(postData.data);
-      console.log("User posts data", postData);
+      // console.log("User posts data", postData);
     } catch (error) {
       console.error("Error fetching user posts:", error);
     }
@@ -121,19 +122,16 @@ function UserProfile() {
                 </div>
                 </div>
                 <div className="contactUser">
-                  <h3 className="h3Headers">Contact</h3>
-                  <p className="pTagIntro"><EmailIcon/>Email: {userProfile?.email}</p>
+                  <h3 className="h3ContentHeaders">Contact</h3>
+                  <p className="pTagIntro"><EmailIcon sx={{fontSize: 20,color: "gray"}}/>Email: {userProfile?.email}</p>
                 </div>
                 <div className="educationSection">
-                  <h3 className="h3Headers">Education</h3>
+                  <h3 className="h3ContentHeaders">Education</h3>
                   {userProfile?.education &&
                     userProfile.education.map((edu, index) => (
                       <div className="introEducation" key={index}>
                         <h3 className="headingEducation">
-                          <img
-                            className="imgEducation"
-                            src="https://static.xx.fbcdn.net/rsrc.php/v3/yG/r/H804hWf2rBh.png"
-                          />
+                          <SchoolIcon sx={{fontSize: 22}}/>
                           School:{edu.schoolName}
                         </h3>
                         <p className="degreeEduction">Degree: {edu.degree}</p>
@@ -141,17 +139,22 @@ function UserProfile() {
                       </div>
                     ))}
                 </div>
-                <div>
-                  <h3>Address</h3>
+                <div className="addressDiv">
+                  <h3 className="h3ContentHeaders">Address</h3>
                   <div className="addreesUser">
+                    <HomeIcon sx={{fontSize: 22,color: "gray"}}/>
                     {userProfile?.address && userProfile.address.length > 0 && (
-                      <>
-                        <p>{userProfile.address[0].street}, </p>
-                        <p>{userProfile.address[0].city}, </p>
-                        <p>{userProfile.address[0].state}, </p>
-                        <p>{userProfile.address[0].country}. </p>
+                      <div className="userAdrees">
+                      <div className="userCity">
+                        <p>{userProfile.address[0].street},</p>
+                        <p>{userProfile.address[0].city},</p>
+                        </div>
+                        <div className="adreesState">
+                        <p>{userProfile.address[0].state},</p>
+                        <p>{userProfile.address[0].country}.</p>
                         <p>{userProfile.address[0].zipCode}</p>
-                      </>
+                        </div>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -193,7 +196,7 @@ function UserProfile() {
                 <section className="countLikeComment">
                   <div className="countLike">
                     <ThumbUpOutlinedIcon />
-                    <Typography>{post.likeCounts}</Typography>
+                    <Typography>{post.likeCount}</Typography>
                   </div>
                   <div className="countComment">
                     <CommentOutlinedIcon />

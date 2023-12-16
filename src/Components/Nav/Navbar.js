@@ -240,7 +240,7 @@ export default function Navbar({onNavClick}) {
           </section>
           <div className="header_center">
                 <div className="header_option header_option--active">
-                  <Link className="linkIcon" to={"/Main"}>
+                  <Link className="linkIcon" to={"/Main"} onClick={()=>onNavClick()}>
                     <HomeIcon fontSize="large" />
                     </Link>
                 </div>

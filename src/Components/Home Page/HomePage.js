@@ -74,7 +74,7 @@ function HomePage() {
       }
     );
     const r = await response.json();
-    console.log(r);
+    // console.log(r);
     setApiData(r["data"]);
   };
 
@@ -398,7 +398,7 @@ function HomePage() {
       <section className="searchSection">
         <Box className="searchBox">
           <div className="searchBar">
-            <Avatar />
+            <Avatar src={userMap.get(loggedInUserId)?.photo}/>
             <div  className="searchInputpost">
             <InputBase
               className="searchInputUser"
@@ -438,8 +438,8 @@ function HomePage() {
                   <Divider id="createPostDivider" />
                 </section>
                 <section className="createPostAccount">
-                  <Avatar />
-                  <h3>name</h3>
+                  <Avatar src={userMap.get(loggedInUserId)?.photo} />
+                  <h3>{loggedInUserName}</h3>
                 </section>
                 <section>
                   <textarea
@@ -447,7 +447,7 @@ function HomePage() {
                     value={postContent}
                     onChange={(e) => setPostContent(e.target.value)}
                   >
-                    What's on your mind, name?
+                    What's on your mind,{loggedInUserName}?
                   </textarea>
                   <input
                     type="file"

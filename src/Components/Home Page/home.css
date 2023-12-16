@@ -235,3 +235,27 @@
   border: 1px solid #ccc;
   border-radius: 10px;
 }
+@media(max-width:600px){
+  .searchSection{
+    width: 100%;
+  }
+  .searchBox{
+    width: 100%;
+  }
+  .postSection{
+    width: 100%;
+    margin-top: 15px;
+    height:90vh;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .postBox{
+    width: 100%;
+    height: 100%;
+  }
+  .imgPost{
+    width: 100%;;
+  }
+}
+
