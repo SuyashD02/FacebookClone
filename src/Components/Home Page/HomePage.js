@@ -19,7 +19,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { userMap } from "../Datastoar";
 import { Link } from "react-router-dom";
-
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import "./home.css";
 import { useAuth } from "../Context/Context";
 
@@ -38,15 +40,16 @@ function HomePage() {
   const [comments, setComments] = useState({});
   const [commentInput, setCommentInput] = useState("");
   const [likeCounts, setLikeCounts] = useState({});
-  const{setPostuserId} =useAuth();
+  const { setPostuserId } = useAuth();
   const [commentCount, setCommentCount] = useState({});
   const [Click, SetClick] = useState(false);
   const [editedComment, setEditedComment] = useState("");
   const [editedCommentId, setEditedCommentId] = useState("");
   const loggedInUserId = localStorage.getItem("userId");
   const loggedInUserName = localStorage.getItem("userName");
-
-
+  const [apiData, setApiData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   const handlepaperclick = () => {
     alert("paper is clickd!!!!");
@@ -57,50 +60,62 @@ function HomePage() {
   const handleInputChange = (e) => {
     setSearchQuery(e.target.value);
   };
-  const [apiData, setApiData] = useState(null);
+
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [page]);
 
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const fetchData = async () => {
-    const response = await fetch(
-      "https://academics.newtonschool.co/api/v1/facebook/post?limit=1000",
-      {
-        method:"Get",
-        headers: {
-          Authorization: `Bearer ${bearerToken}`,
-          projectID: "f104bi07c490",
-        },
+    console.log("fetchData Function Call");
+    try {
+      const response = await fetch(
+        `https://academics.newtonschool.co/api/v1/facebook/post?limit=10&page=${page}`,
+        {
+          method: "Get",
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+            projectID: "f104bi07c490",
+          },
+        }
+      );
+      // const r = await response.json();
+      // console.log(r);
+      // setApiData(r["data"]);
+      if (response.ok) {
+        const data = await response.json();
+        console.log("data  10 results", data);
+        if (data.data.length === 0) {
+          setHasMore(false);
+        } else {
+          setApiData((prevData) => [...prevData, ...data.data]);
+
+          data.data.forEach(async (post) => {
+            await delay(2000); // Add a delay of 1 second between requests
+            handleFetchComments(post._id);
+          });
+        }
+      } else {
+        console.error("Error while fetching data.");
       }
-    );
-    const r = await response.json();
-    console.log(r);
-    setApiData(r["data"]);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
-
-  async function fetchCreatedPost() {
-    const response = await fetch(
-      "https://academics.newtonschool.co/api/v1/facebook/post/",
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${bearerToken}`,
-          projectID: "f104bi07c490",
-        },
-      }
-    );
-  }
+  const loadMorePosts = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
 
   const handleCreatePost = async () => {
     console.log("Function is called");
     try {
       const formData = new FormData();
       formData.append("content", postContent);
-      
+
       formData.append("images", postImage);
-      
-      const response = await fetch(
+
+      const createpost = await fetch(
         "https://academics.newtonschool.co/api/v1/facebook/post/",
         {
           method: "POST",
@@ -112,16 +127,15 @@ function HomePage() {
         }
       );
 
-      if (response.ok) {
+      if (createpost.ok) {
         console.log("Succecfully Posted");
-        const data = await response.json();
-        
+        const data = await createpost.json();
+
         console.log("Post Data:", data);
         fetchData();
         handleClose();
-      
       } else {
-        const errorData = await response.json();
+        const errorData = await createpost.json();
         setErrorPost(errorData.message);
       }
     } catch (error) {
@@ -169,39 +183,16 @@ function HomePage() {
       console.error("Error:", error);
     }
   };
-  
+
   useEffect(() => {
     const counts = {};
     const commentsData = {};
-    // const fetchUserInformation = async (userId) => {
-    //   const response = await fetch(
-    //     `https://academics.newtonschool.co/api/v1/user/${userId}`,
-    //     {
-    //       method: "GET",
-    //       headers: {
-    //         Authorization: `Bearer ${bearerToken}`,
-    //         projectID: "f104bi07c490",
-    //       },
-    //     }
-    //   );
-  
-    //   if (response.ok) {
-    //     const userData = await response.json();
-    //     userMap.set(userId, userData.data);
-    //   } else {
-    //     console.error("Error while fetching user information");
-    //   }
-    // };
+
     if (apiData) {
       apiData.forEach((post) => {
         counts[post._id] = post.likeCount;
         commentsData[post._id] = [];
         handleFetchComments(post._id);
-        // if (post.comments) {
-        //   post.comments.forEach((comment) => {
-        //     fetchUserInformation(comment.author);
-        //   });
-        // }
       });
       setLikeCounts(counts);
       setComments(commentsData);
@@ -361,25 +352,42 @@ function HomePage() {
 
   return (
     <div className="homePage">
-      
       {/* For Status */}
-     
 
       <section className="gridBox">
         <Grid container justifyContent="center" spacing={2}>
-
           <Paper className="paper" onClick={handlepaperclick}>
-                <img className="imgStory" src={'https://thumbor.forbes.com/thumbor/trim/0x53:980x604/fit-in/711x399/smart/https://specials-images.forbesimg.com/imageserve/60834c47698b7d2cd708c3f0/0x0.jpg'} />
-              </Paper>
-              <Paper className="paper" onClick={handlepaperclick}>
-                <img className="imgStory"  src={'https://cdn.mos.cms.futurecdn.net/68nJwaxHSFmE6whdL4r5oH-970-80.jpg.webp'} />
-              </Paper>
-              <Paper  className="paper" onClick={handlepaperclick}>
-                <img className="imgStory" src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnG0NLa59PE1ZVQeqq4ZJkkkhuibDTG2hHYg&usqp=CAU"} />
-              </Paper>
-              <Paper className="paper" onClick={handlepaperclick}>
-                <img className="imgStory" src={"https://media.geeksforgeeks.org/wp-content/cdn-uploads/20191101175718/How-do-I-become-a-good-Java-programmer.png"} />
-              </Paper>
+            <img
+              className="imgStory"
+              src={
+                "https://thumbor.forbes.com/thumbor/trim/0x53:980x604/fit-in/711x399/smart/https://specials-images.forbesimg.com/imageserve/60834c47698b7d2cd708c3f0/0x0.jpg"
+              }
+            />
+          </Paper>
+          <Paper className="paper" onClick={handlepaperclick}>
+            <img
+              className="imgStory"
+              src={
+                "https://cdn.mos.cms.futurecdn.net/68nJwaxHSFmE6whdL4r5oH-970-80.jpg.webp"
+              }
+            />
+          </Paper>
+          <Paper className="paper" onClick={handlepaperclick}>
+            <img
+              className="imgStory"
+              src={
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnG0NLa59PE1ZVQeqq4ZJkkkhuibDTG2hHYg&usqp=CAU"
+              }
+            />
+          </Paper>
+          <Paper className="paper" onClick={handlepaperclick}>
+            <img
+              className="imgStory"
+              src={
+                "https://media.geeksforgeeks.org/wp-content/cdn-uploads/20191101175718/How-do-I-become-a-good-Java-programmer.png"
+              }
+            />
+          </Paper>
         </Grid>
       </section>
 
@@ -388,19 +396,19 @@ function HomePage() {
       <section className="searchSection">
         <Box className="searchBox">
           <div className="searchBar">
-            <Avatar src={userMap.get(loggedInUserId)?.photo}/>
-            <div  className="searchInputpost">
-            <InputBase
-              className="searchInputUser"
-              placeholder={`What's on your mind,${loggedInUserName}`}
-              value={searchQuery}
-              onChange={handleInputChange}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSearch();
-                }
-              }}
-            />
+            <Avatar src={userMap.get(loggedInUserId)?.photo} />
+            <div className="searchInputpost">
+              <InputBase
+                className="searchInputUser"
+                placeholder={`What's on your mind,${loggedInUserName}`}
+                value={searchQuery}
+                onChange={handleInputChange}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSearch();
+                  }
+                }}
+              />
             </div>
           </div>
           <Divider id="divider" />
@@ -422,52 +430,58 @@ function HomePage() {
             >
               <Box className="createPostModal">
                 <section className="addNewpostSection">
-                <section className="createPostHeader">
-                  <Typography variant="h6" component="h2">
-                    Create a Post
-                  </Typography>
-                  <Divider id="createPostDivider" />
-                </section>
-                <section className="createPostAccount">
-                  <Avatar src={userMap.get(loggedInUserId)?.photo} />
-                  <h3>{loggedInUserName}</h3>
-                </section>
-                <section>
-                  <textarea
-                    id="createPostBio"
-                    value={postContent}
-                    onChange={(e) => setPostContent(e.target.value)}
-                  >
-                    What's on your mind,{loggedInUserName}?
-                  </textarea>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    style={{ display: "none" }}
-                    id="imageInput"
-                    onChange={handleImageChange}
-                  />
-                  <div className="beforeDisplayImageDiv">
-                  {postImage && (
-                  <img
-                  className="beforePostImage"
-                    src={URL.createObjectURL(postImage)}
-                    alt="selected_img"
-                  />
-                )}
-                </div>
-                </section>
-                <section className="createPostBar">
-                  <h3>Add to your post</h3>
-                  
-                  <CollectionsIcon onClick={handleOpenImage} />
-                  <PlaceIcon />
-                </section>
-                <section>
-                  <button className="createPostBtn" onClick={handleCreatePost} >
-                    Post
-                  </button>
-                </section>
+                  <section className="createPostHeader">
+                    <Typography variant="h6" component="h2">
+                      Create a Post
+                    </Typography>
+                    <Divider id="createPostDivider" />
+                  </section>
+                  <section className="createPostAccount">
+                    <Avatar src={userMap.get(loggedInUserId)?.photo} />
+                    <h3>{loggedInUserName}</h3>
+                  </section>
+                  <section>
+                    <div className="textAreaDiv">
+                    <textarea
+                      id="createPostBio"
+                      placeholder="Enter a description for the Post"
+                      value={postContent}
+                      onChange={(e) => setPostContent(e.target.value)}
+                    >
+                      What's on your mind,{loggedInUserName}?
+                    </textarea>
+                    </div>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      style={{ display: "none" }}
+                      id="imageInput"
+                      onChange={handleImageChange}
+                    />
+                    <div className="beforeDisplayImageDiv">
+                      {postImage && (
+                        <img
+                          className="beforePostImage"
+                          src={URL.createObjectURL(postImage)}
+                          alt="selected_img"
+                        />
+                      )}
+                    </div>
+                  </section>
+                  <section className="createPostBar">
+                    <h3>Add to your post</h3>
+
+                    <CollectionsIcon onClick={handleOpenImage} />
+                    <PlaceIcon />
+                  </section>
+                  <section>
+                    <button
+                      className="createPostBtn"
+                      onClick={handleCreatePost}
+                    >
+                      Post
+                    </button>
+                  </section>
                 </section>
               </Box>
             </Modal>
@@ -485,24 +499,44 @@ function HomePage() {
         {apiData &&
           apiData.map((post) => (
             <Box className="postBox" key={post._id}>
-              <Link className="userProfileName" to="/userprofile">
-              <div onClick={()=>{setPostuserId(post.author._id)}} className="accountPostBox">
-                {/*<Avatar>{post.author.profileImage}</Avatar>*/}
-                
-                <Avatar alt={post.author.name} src={post.author.profileImage} />
-                
-                <Typography>{post.author.name}</Typography>
-              </div>
-              </Link>
+              
+                <div className="accountPostBox">
+                  {/*<Avatar>{post.author.profileImage}</Avatar>*/}
+                  <Link className="userProfileName" to="/userprofile">
+                  <div className="userAccount" onClick={() => {
+                    setPostuserId(post.author._id);
+                  }}>
+                  <Avatar
+                    alt={post.author.name}
+                    src={post.author.profileImage}
+                  />
+
+                  <Typography>{post.author.name}</Typography>
+                  </div>
+                  </Link>
+                  {/* <Menu>
+                  <MenuItem/>
+                  </Menu> */}
+                  <div className="moreIcon">
+                  <MoreVertIcon/>
+                  </div>
+                  
+                  
+                </div>
+              
               <div className="captionForPost">
                 <Typography id="captionPost">{post.content}</Typography>
               </div>
               <section className="imgPostBox">
                 <img
-                  src={post.images && post.images.length > 0 ? post.images[0]: "default"}
+                  src={
+                    post.images && post.images.length > 0
+                      ? post.images[0]
+                      : "default"
+                  }
                   //src={"https://img.freepik.com/free-photo/maldives-island_74190-478.jpg?w=996&t=st=1696610601~exp=1696611201~hmac=b604347e0b051b603ab3ebd409486633c249828ee4da57b9e2d786c4d16dcd2e"}
                   className="imgPost"
-                  alt="Image of post"
+                  alt="Image is not posted"
                 />
               </section>
               <section className="countLikeComment">
@@ -516,7 +550,7 @@ function HomePage() {
                   <Typography>{post.commentCount}</Typography>
                 </div>
               </section>
-              <Divider id="likeDevider"/>
+              <Divider id="likeDevider" />
 
               <section className="postButtons">
                 <Button
@@ -531,7 +565,6 @@ function HomePage() {
                 >
                   Comment
                 </Button>
-               
               </section>
 
               <Divider />
@@ -555,33 +588,35 @@ function HomePage() {
                     <h3 id="headingComment">Comment</h3>
                     {comments[post._id] &&
                       comments[post._id].map((comment, index) => (
-                        
                         <div key={index} className="comment">
-                          
                           <div className="CommentAuthor">
-                          <Avatar sx={{ width: 30, height: 30 }} src={userMap.get(comment.author)?.photo}></Avatar>
-                          <h3>{comment.authorName}</h3>
-                          {comment.author === loggedInUserId && (
-                          <div className="editCommetSection">
-                            <EditIcon
-                              className="editIconComment"
-                              onClick={() =>
-                                handleEditComment(
-                                  post._id,
-                                  comment._id,
-                                  comment.content
-                                )
-                              }
-                            ></EditIcon>
-                            <DeleteIcon
-                              className="deleteIconComment"
-                              onClick={() =>
-                                deleteCommentForPost(post._id, comment._id)
-                              }
-                            ></DeleteIcon>
-                          </div>)}
+                            <Avatar
+                              sx={{ width: 30, height: 30 }}
+                              src={userMap.get(comment.author)?.photo}
+                            ></Avatar>
+                            <h3>{comment.authorName}</h3>
+                            {comment.author === loggedInUserId && (
+                              <div className="editCommetSection">
+                                <EditIcon
+                                  className="editIconComment"
+                                  onClick={() =>
+                                    handleEditComment(
+                                      post._id,
+                                      comment._id,
+                                      comment.content
+                                    )
+                                  }
+                                ></EditIcon>
+                                <DeleteIcon
+                                  className="deleteIconComment"
+                                  onClick={() =>
+                                    deleteCommentForPost(post._id, comment._id)
+                                  }
+                                ></DeleteIcon>
+                              </div>
+                            )}
                           </div>
-                         
+
                           {isEditingComment(comment._id) ? ( // Check if the comment is being edited
                             <div className="editCommentDiv">
                               <input
@@ -605,7 +640,6 @@ function HomePage() {
                           ) : (
                             <h3 className="commentH3">{comment.content}</h3>
                           )}
-                          
                         </div>
                       ))}
                   </div>
@@ -613,6 +647,13 @@ function HomePage() {
               </section>
             </Box>
           ))}
+        {hasMore && (
+          <div className="loadMoreBTN">
+          <Button onClick={loadMorePosts} className="LoadMoreButton">
+            Load More
+          </Button>
+          </div>
+        )}
       </section>
     </div>
   );

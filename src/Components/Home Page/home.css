@@ -78,9 +78,18 @@
   }
   .accountPostBox{
     display: flex;
-    gap: 1em;    
+    justify-content: space-between;
+    align-items: center;   
     margin-top: 5px;
-    margin-left: 17px;
+    margin-left: 10px;
+    width: 95%;
+  }
+  .userAccount{
+    display: flex;
+    gap: 1em;
+  }
+  .moreIcon{
+    border: 1px solid black;
   }
   .imgPost{
     display: grid;
@@ -108,11 +117,19 @@
     gap: 10px;
     margin-top: 10px;
   }
-  #createPostBio{
+  .textAreaDiv{
+    box-shadow: 1px 2px 5px black;
+    border-radius: 5px;
     width: 100%;
-    height: 12vh;
+    display: flex;
+    flex-direction: column;
+    height: 14vh;
+  }
+  #createPostBio{
     margin-top: 10px;
+    height: 100%;
     border: none;
+    margin-left: 10px;
   }
   .createPostBar{
     display: flex;
@@ -261,11 +278,18 @@
 .beforeDisplayImageDiv{
   width: 100%;
   height: 30vh;
+  margin-top: 10px;
 }
 .beforePostImage{
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+.loadMoreBTN{
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  width: 100%;
 }
 @media(max-width:600px){
   .searchSection{
