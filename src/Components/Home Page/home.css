@@ -235,6 +235,38 @@
   border: 1px solid #ccc;
   border-radius: 10px;
 }
+
+.createPostModal{
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60vh;
+  height: 80%;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 2px 5px black;
+  background-color: white;
+  padding: 4;
+  display: flex;
+  justify-content: center;
+}
+.addNewpostSection{
+  width: 95%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.beforeDisplayImageDiv{
+  width: 100%;
+  height: 30vh;
+}
+.beforePostImage{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
 @media(max-width:600px){
   .searchSection{
     width: 100%;

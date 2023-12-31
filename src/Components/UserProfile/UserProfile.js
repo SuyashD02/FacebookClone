@@ -90,7 +90,7 @@ function UserProfile() {
               <section className="profileImage">
                 <img
                   id="profileimg"
-                  src={userProfile?.profileImage}
+                  src={userProfile?.profileImage||"profile Image"}
                   alt="user Image"
                 />
               </section>
@@ -99,7 +99,7 @@ function UserProfile() {
                   <section className="avtarProfile">
                     <Avatar
                       sx={{ width: 135, height: 135 }}
-                      src={userProfile?.profileImage}
+                      src={userProfile?.profileImage || "profile Image"}
                     ></Avatar>
                   </section>
 
@@ -187,7 +187,7 @@ function UserProfile() {
                 </div>
                 <section className="imgPostBox">
                   <img
-                    src={post.channel.image}
+                    src={post?.channel?.image||"User Image"}
                     //src={"https://img.freepik.com/free-photo/maldives-island_74190-478.jpg?w=996&t=st=1696610601~exp=1696611201~hmac=b604347e0b051b603ab3ebd409486633c249828ee4da57b9e2d786c4d16dcd2e"}
                     className="imgPost"
                     alt="Image of post"

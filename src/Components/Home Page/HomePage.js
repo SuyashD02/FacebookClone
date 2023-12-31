@@ -64,7 +64,7 @@ function HomePage() {
 
   const fetchData = async () => {
     const response = await fetch(
-      "https://academics.newtonschool.co/api/v1/facebook/post?limit=100",
+      "https://academics.newtonschool.co/api/v1/facebook/post?limit=1000",
       {
         method:"Get",
         headers: {
@@ -74,22 +74,11 @@ function HomePage() {
       }
     );
     const r = await response.json();
-    // console.log(r);
+    console.log(r);
     setApiData(r["data"]);
   };
 
-  const style = {
-    position: "absolute",
-    top: "60%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    height: 320,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
+
   async function fetchCreatedPost() {
     const response = await fetch(
       "https://academics.newtonschool.co/api/v1/facebook/post/",
@@ -108,10 +97,9 @@ function HomePage() {
     try {
       const formData = new FormData();
       formData.append("content", postContent);
-      if (postImage) {
-        formData.append("images", postImage);
-      }
-
+      
+      formData.append("images", postImage);
+      
       const response = await fetch(
         "https://academics.newtonschool.co/api/v1/facebook/post/",
         {
@@ -127,9 +115,11 @@ function HomePage() {
       if (response.ok) {
         console.log("Succecfully Posted");
         const data = await response.json();
-
-        // console.log("Post Data:", data);
+        
+        console.log("Post Data:", data);
         fetchData();
+        handleClose();
+      
       } else {
         const errorData = await response.json();
         setErrorPost(errorData.message);
@@ -430,7 +420,8 @@ function HomePage() {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <Box sx={style}>
+              <Box className="createPostModal">
+                <section className="addNewpostSection">
                 <section className="createPostHeader">
                   <Typography variant="h6" component="h2">
                     Create a Post
@@ -456,16 +447,27 @@ function HomePage() {
                     id="imageInput"
                     onChange={handleImageChange}
                   />
+                  <div className="beforeDisplayImageDiv">
+                  {postImage && (
+                  <img
+                  className="beforePostImage"
+                    src={URL.createObjectURL(postImage)}
+                    alt="selected_img"
+                  />
+                )}
+                </div>
                 </section>
                 <section className="createPostBar">
                   <h3>Add to your post</h3>
+                  
                   <CollectionsIcon onClick={handleOpenImage} />
                   <PlaceIcon />
                 </section>
                 <section>
-                  <button className="createPostBtn" onClick={handleCreatePost}>
+                  <button className="createPostBtn" onClick={handleCreatePost} >
                     Post
                   </button>
+                </section>
                 </section>
               </Box>
             </Modal>
@@ -497,7 +499,7 @@ function HomePage() {
               </div>
               <section className="imgPostBox">
                 <img
-                  src={post.channel.image}
+                  src={post.images && post.images.length > 0 ? post.images[0]: "default"}
                   //src={"https://img.freepik.com/free-photo/maldives-island_74190-478.jpg?w=996&t=st=1696610601~exp=1696611201~hmac=b604347e0b051b603ab3ebd409486633c249828ee4da57b9e2d786c4d16dcd2e"}
                   className="imgPost"
                   alt="Image of post"
