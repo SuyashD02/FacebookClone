@@ -52,6 +52,7 @@ function HomePage() {
   const [apiData, setApiData] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const load=useRef(null);
 
   const handlepaperclick = () => {
     alert("paper is clickd!!!!");
@@ -70,16 +71,14 @@ function HomePage() {
     setDropdownOpen(false);
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [page]);
+  
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const fetchData = async () => {
     console.log("fetchData Function Call");
     try {
       const response = await fetch(
-        `https://academics.newtonschool.co/api/v1/facebook/post?limit=10&page=${page}`,
+        `https://academics.newtonschool.co/api/v1/facebook/post?limit=10`,
         {
           method: "Get",
           headers: {
@@ -88,19 +87,15 @@ function HomePage() {
           },
         }
       );
-      // const r = await response.json();
-      // console.log(r);
-      // setApiData(r["data"]);
       if (response.ok) {
         const data = await response.json();
         console.log("data  10 results", data);
         if (data.data.length === 0) {
           setHasMore(false);
         } else {
-          setApiData((prevData) => [...prevData, ...data.data]);
-
+          setApiData(data.data);
           data.data.forEach(async (post) => {
-            await delay(2000); // Add a delay of 1 second between requests
+            await delay(2000);
             handleFetchComments(post._id);
           });
         }
@@ -112,8 +107,63 @@ function HomePage() {
     }
   };
 
-  const loadMorePosts = () => {
-    setPage((prevPage) => prevPage + 1);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const lastPostRef = load.current;
+
+      if (lastPostRef) {
+        const lastPostRect = lastPostRef.getBoundingClientRect();
+        const isBottom = lastPostRect.bottom <= window.innerHeight;
+  
+        if (isBottom && hasMore) {
+          loadMorePosts();
+        }
+      }
+  };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [hasMore]);
+
+  const loadMorePosts = async () => {
+    try {
+      const nextPage = page + 1;
+      const response = await fetch(
+        `https://academics.newtonschool.co/api/v1/facebook/post?limit=10&page=${nextPage}`,
+        {
+          method: "Get",
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+            projectID: "7n1a3lrketcp",
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        console.log("loads",data)
+        if (data.data.length === 0) {
+          setHasMore(false);
+        } else {
+          setApiData((prevData) => [...prevData, ...data.data]);
+          data.data.forEach(async (post) => {
+            await delay(2000);
+            handleFetchComments(post._id);
+          });
+          setPage(nextPage); 
+        }
+      } else {
+        console.error("Error while fetching data.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const handleCreatePost = async () => {
@@ -140,8 +190,7 @@ function HomePage() {
         console.log("Succecfully Posted");
         const data = await createpost.json();
         console.log("Post Data:", data);
-
-        setApiData((prevData) => [data.data, ...prevData]);
+        fetchData();
         handleClose();
       } else {
         const errorData = await createpost.json();
@@ -197,7 +246,7 @@ function HomePage() {
     const counts = {};
     const commentsData = {};
 
-    if (apiData) {
+    if (apiData !== null && apiData !== undefined) {
       apiData.forEach((post) => {
         counts[post._id] = post.likeCount;
         commentsData[post._id] = [];
@@ -371,7 +420,7 @@ function HomePage() {
 
       if (response.ok) {
         console.log("Post deleted successfully");
-        setApiData((prevData) => prevData.filter((post) => post._id !== postId));
+        setApiData((preData) => preData.filter((post) => post._id !== postId));
       } else {
         const errorData = await response.json();
         console.error("Error while deleting the post:", errorData);
@@ -532,7 +581,7 @@ function HomePage() {
 
       <section className="postSection">
         {apiData &&
-          apiData.map((post) => (
+          apiData.map((post,index) => (
             <Box className="postBox" key={post._id}>
               
                 <div className="accountPostBox">

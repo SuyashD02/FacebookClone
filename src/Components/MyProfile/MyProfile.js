@@ -65,7 +65,7 @@ function MyProfile() {
   };
 
   useEffect(() => {
-    fetchData("userId");
+    fetchData();
   }, []);
 
   useEffect(() => {
