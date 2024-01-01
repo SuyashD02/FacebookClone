@@ -37,7 +37,7 @@ function SearchComponent(){
           method: "GET",
           headers: {
             Authorization: `Bearer ${bearerToken}`,
-            projectID: "f104bi07c490",
+            projectID: "7n1a3lrketcp",
           },
         }
       );
@@ -73,7 +73,7 @@ function SearchComponent(){
           method: "POST",
           headers: {
             Authorization: `Bearer ${bearerToken}`,
-            projectID: "f104bi07c490",
+            projectID: "7n1a3lrketcp",
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ content: commentInput }),
@@ -112,7 +112,7 @@ function SearchComponent(){
           method: "PATCH",
           headers: {
             Authorization: `Bearer ${bearerToken}`,
-            projectID: "f104bi07c490",
+            projectID: "7n1a3lrketcp",
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ content: updatedComment }),
@@ -152,7 +152,7 @@ function SearchComponent(){
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${bearerToken}`,
-            projectID: "f104bi07c490",
+            projectID: "7n1a3lrketcp",
           },
         }
       );
@@ -183,7 +183,7 @@ function SearchComponent(){
     //       method: "GET",
     //       headers: {
     //         Authorization: `Bearer ${bearerToken}`,
-    //         projectID: "f104bi07c490",
+    //         projectID: "7n1a3lrketcp",
     //       },
     //     }
     //   );

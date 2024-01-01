@@ -23,7 +23,7 @@ function ABDD() {
   const GetData = async () => {
     const response = await fetch(api, {
       headers: {
-        projectID: "f104bi07c490",
+        projectID: "7n1a3lrketcp",
       },
     });
     const r = await response.json();

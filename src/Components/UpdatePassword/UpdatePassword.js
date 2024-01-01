@@ -43,7 +43,7 @@ function UpdatePassword(){
               method: "PATCH",
               headers: {
                 "Content-Type": "application/json",
-                projectID: "f104bi07c490",
+                projectID: "7n1a3lrketcp",
                 Authorization: `Bearer ${userToken}`
               },
               body: JSON.stringify({

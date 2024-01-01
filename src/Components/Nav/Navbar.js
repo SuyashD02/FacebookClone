@@ -176,7 +176,7 @@ export default function Navbar({onNavClick}) {
     try {
       const response = await fetch(searchUrl2, {
         headers: {
-          projectID: "f104bi07c490",
+          projectID: "7n1a3lrketcp",
         },
       });
       const searchData = await response.json();

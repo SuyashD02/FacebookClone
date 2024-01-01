@@ -35,13 +35,13 @@ function UserProfile() {
           method: "GET",
           headers: {
             Authorization: `Bearer ${bearerToken}`,
-            projectID: "f104bi07c490",
+            projectID: "7n1a3lrketcp",
           },
         }
       );
       const data = await response.json();
       setUserProfile(data.data);
-      // console.log(data);
+      console.log(data);
       setUserName(data.data.name);
     } catch (error) {
       console.error("Error fetching user profile:", error);
@@ -51,18 +51,18 @@ function UserProfile() {
   const fetchPosts = async () => {
     try {
       const response = await fetch(
-        `https://academics.newtonschool.co/api/v1/facebook/post?search={"author.name":"${userName}"}`,
+        `https://academics.newtonschool.co/api/v1/facebook/post?filter={"author.name":"${userName}"}`,
         {
           method: "GET",
           headers: {
             Authorization: `Bearer ${bearerToken}`,
-            projectID: "f104bi07c490",
+            projectID: "7n1a3lrketcp",
           },
         }
       );
       const postData = await response.json();
       setUserPosts(postData.data);
-      // console.log("User posts data", postData);
+      console.log("User posts data", postData);
     } catch (error) {
       console.error("Error fetching user posts:", error);
     }

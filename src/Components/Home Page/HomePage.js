@@ -24,6 +24,7 @@ import Menu from '@mui/material/Menu';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import "./home.css";
 import { useAuth } from "../Context/Context";
+import ListItemButton from "@mui/material/ListItemButton";
 
 //import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -47,6 +48,7 @@ function HomePage() {
   const [editedCommentId, setEditedCommentId] = useState("");
   const loggedInUserId = localStorage.getItem("userId");
   const loggedInUserName = localStorage.getItem("userName");
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [apiData, setApiData] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -59,6 +61,13 @@ function HomePage() {
   };
   const handleInputChange = (e) => {
     setSearchQuery(e.target.value);
+  };
+  const openDropdown = () => {
+    setDropdownOpen(true);
+  };
+
+  const closeDropdown = () => {
+    setDropdownOpen(false);
   };
 
   useEffect(() => {
@@ -75,7 +84,7 @@ function HomePage() {
           method: "Get",
           headers: {
             Authorization: `Bearer ${bearerToken}`,
-            projectID: "f104bi07c490",
+            projectID: "7n1a3lrketcp",
           },
         }
       );
@@ -121,7 +130,7 @@ function HomePage() {
           method: "POST",
           headers: {
             Authorization: `Bearer ${bearerToken}`,
-            projectID: "f104bi07c490",
+            projectID: "7n1a3lrketcp",
           },
           body: formData,
         }
@@ -130,9 +139,9 @@ function HomePage() {
       if (createpost.ok) {
         console.log("Succecfully Posted");
         const data = await createpost.json();
-
         console.log("Post Data:", data);
-        fetchData();
+
+        setApiData((prevData) => [data.data, ...prevData]);
         handleClose();
       } else {
         const errorData = await createpost.json();
@@ -165,7 +174,7 @@ function HomePage() {
           method: isLiked ? "DELETE" : "POST",
           headers: {
             Authorization: `Bearer ${bearerToken}`,
-            projectID: "f104bi07c490",
+            projectID: "7n1a3lrketcp",
           },
         }
       );
@@ -209,7 +218,7 @@ function HomePage() {
           method: "GET",
           headers: {
             Authorization: `Bearer ${bearerToken}`,
-            projectID: "f104bi07c490",
+            projectID: "7n1a3lrketcp",
           },
         }
       );
@@ -245,7 +254,7 @@ function HomePage() {
           method: "POST",
           headers: {
             Authorization: `Bearer ${bearerToken}`,
-            projectID: "f104bi07c490",
+            projectID: "7n1a3lrketcp",
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ content: commentInput }),
@@ -284,7 +293,7 @@ function HomePage() {
           method: "PATCH",
           headers: {
             Authorization: `Bearer ${bearerToken}`,
-            projectID: "f104bi07c490",
+            projectID: "7n1a3lrketcp",
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ content: updatedComment }),
@@ -324,7 +333,7 @@ function HomePage() {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${bearerToken}`,
-            projectID: "f104bi07c490",
+            projectID: "7n1a3lrketcp",
           },
         }
       );
@@ -340,6 +349,32 @@ function HomePage() {
       } else {
         const errorData = await response.json();
         console.error("Error while deleting a comment:", errorData);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  // Delete Post
+  const handleDeletePost = async (postId) => {
+    try {
+      const response = await fetch(
+        `https://academics.newtonschool.co/api/v1/facebook/post/${postId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+            projectID: "7n1a3lrketcp",
+          },
+        }
+      );
+
+      if (response.ok) {
+        console.log("Post deleted successfully");
+        setApiData((prevData) => prevData.filter((post) => post._id !== postId));
+      } else {
+        const errorData = await response.json();
+        console.error("Error while deleting the post:", errorData);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -517,13 +552,34 @@ function HomePage() {
                   {/* <Menu>
                   <MenuItem/>
                   </Menu> */}
-                  <div className="moreIcon">
+                  {post.author._id === loggedInUserId && (
+                  <div className="moreIconDiv">
+                  <div className="moreIcon" onClick={openDropdown}>
                   <MoreVertIcon/>
                   </div>
-                  
+                  {isDropdownOpen && (
+                  <div className="dropdownContent"
+                  onMouseEnter={openDropdown}
+                    onMouseLeave={closeDropdown}
+                    >
+                    <div className="accountBox">  
+                    <div className="dropMyBookings" onClick={closeDropdown}>
+                      <ListItemButton>
+                      <p>Edit</p>
+                      </ListItemButton>
+                    <ListItemButton onClick={()=> handleDeletePost(post._id)}>
+                    <p>Delete</p>
+                    </ListItemButton>
+                    
+                    </div>
+                    </div> 
+                  </div>
+                )}
+                  </div>
+                  )}
                   
                 </div>
-              
+                
               <div className="captionForPost">
                 <Typography id="captionPost">{post.content}</Typography>
               </div>

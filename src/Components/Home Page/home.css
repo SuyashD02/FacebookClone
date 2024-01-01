@@ -88,8 +88,17 @@
     display: flex;
     gap: 1em;
   }
+  .moreIconDiv{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+  }
   .moreIcon{
-    border: 1px solid black;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5em;
   }
   .imgPost{
     display: grid;
@@ -291,6 +300,23 @@
   margin-top: 25px;
   width: 100%;
 }
+.dropdownContent{
+  position: absolute;
+  margin-top: 30px;
+  width: 115px;
+}
+.accountBox{
+  position: relative;
+    box-shadow: 1px 2px 5px black;
+    background-color: white;
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1;
+}
 @media(max-width:600px){
   .searchSection{
     width: 100%;
@@ -312,6 +338,14 @@
   }
   .imgPost{
     width: 100%;;
+  }
+  .createPostModal{
+    width: 90%;
+    height: 72%;
+  }
+  .beforeDisplayImageDiv{
+    height: 20vh;
+    
   }
 }
 

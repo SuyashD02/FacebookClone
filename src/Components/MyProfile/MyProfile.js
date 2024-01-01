@@ -31,7 +31,7 @@ function MyProfile() {
           method: "GET",
           headers: {
             Authorization: `Bearer ${bearerToken}`,
-            projectID: "f104bi07c490",
+            projectID: "7n1a3lrketcp",
           },
         }
       );
@@ -47,12 +47,12 @@ function MyProfile() {
   const fetchPosts = async () => {
     try {
       const response = await fetch(
-        `https://academics.newtonschool.co/api/v1/facebook/post?search={"author.name":"${userName}"}`,
+        `https://academics.newtonschool.co/api/v1/facebook/post?filter={"author.name":"${userName}"}`,
         {
           method: "GET",
           headers: {
             Authorization: `Bearer ${bearerToken}`,
-            projectID: "f104bi07c490",
+            projectID: "7n1a3lrketcp",
           },
         }
       );

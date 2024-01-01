@@ -21,7 +21,7 @@ function Page() {
           headers: {
             "Content-Type": "application/json",
             Authorization:`Bearer ${bearerToken}`,
-            projectID: "f104bi07c490",
+            projectID: "7n1a3lrketcp",
           },
           body: JSON.stringify({
             title: pageName,
