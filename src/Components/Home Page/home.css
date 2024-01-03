@@ -140,6 +140,9 @@
     border: none;
     margin-left: 10px;
   }
+  #createPostBio:focus{
+    outline: none;
+  }
   .createPostBar{
     display: flex;
     justify-content:space-between;
@@ -191,6 +194,9 @@
     width: 70%;
     border: 1px solid #ccc;
     border-radius: 10px;
+  }
+  #inputBoxComment:focus{
+    outline: none;
   }
   .commentsSection{
     display: flex;
@@ -260,6 +266,9 @@
   width: 70%;
   border: 1px solid #ccc;
   border-radius: 10px;
+}
+#inputBoxCommentEdit:focus{
+  outline: none;
 }
 
 .createPostModal{
