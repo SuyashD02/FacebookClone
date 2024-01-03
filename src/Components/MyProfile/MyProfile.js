@@ -169,7 +169,7 @@ function MyProfile() {
                 {userPosts &&
                   userPosts.map((post) => (
                     <Box className="userPostBox" key={post._id}>
-                      <Link className="userProfileName" to="/userprofile">
+                      {/* <Link className="userProfileName" to="/userprofile">
                         <div
                           onClick={() => {
                             setPostuserId(post.author._id);
@@ -183,7 +183,23 @@ function MyProfile() {
 
                           <Typography>{post.author.name}</Typography>
                         </div>
-                      </Link>
+                      </Link> */}
+                      <div className="accountPostBox">
+                  <Link className="userProfileName" to="/userprofile">
+                  <div className="userAccount" onClick={() => {
+                    setPostuserId(post.author._id);
+                  }}>
+                  <Avatar
+                    alt={post.author.name}
+                    src={post.author.profileImage}
+                  />
+
+                  <Typography>{post.author.name}</Typography>
+                  </div>
+                  </Link>
+                  
+                  
+                </div>
                       <div className="captionForPost">
                         <Typography id="captionPost">{post.content}</Typography>
                       </div>

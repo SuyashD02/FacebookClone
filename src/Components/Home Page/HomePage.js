@@ -53,6 +53,7 @@ function HomePage() {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const load=useRef(null);
+  const userIdForHome = localStorage.getItem("userId");
 
   const handlepaperclick = () => {
     alert("paper is clickd!!!!");
@@ -676,7 +677,7 @@ function HomePage() {
 
               <section className="PostComment">
                 <div className="commentInputDiv">
-                  <Avatar sx={{ width: 35, height: 35 }}></Avatar>
+                  <Avatar sx={{ width: 35, height: 35 }} src={userMap.get(userIdForHome)?.photo}></Avatar>
                   <input
                     type="text"
                     id="inputBoxComment"

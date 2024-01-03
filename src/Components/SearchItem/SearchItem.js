@@ -173,6 +173,8 @@ function SearchComponent(){
       console.error("Error:", error);
     }
   };
+
+  
   useEffect(() => {
     const counts = {};
     const commentsData = {};
@@ -217,22 +219,32 @@ function SearchComponent(){
     {apiSearch &&
           apiSearch.map((post) => (
             <Box className="postBox" key={post._id}>
-             <Link className="userProfileName" to="/userprofile">
-              <div onClick={()=>{setPostuserId(post.author._id)}} className="accountPostBox">
-                {/*<Avatar>{post.author.profileImage}</Avatar>*/}
-                
-                <Avatar alt={post.author.name} src={post.author.profileImage} />
-                
-                <Typography>{post.author.name}</Typography>
-              </div>
-              </Link>
+             <div className="accountPostBox">
+                  <Link className="userProfileName" to="/userprofile">
+                  <div className="userAccount" onClick={() => {
+                    setPostuserId(post.author._id);
+                  }}>
+                  <Avatar
+                    alt={post.author.name}
+                    src={post.author.profileImage}
+                  />
+
+                  <Typography>{post.author.name}</Typography>
+                  </div>
+                  </Link>
+                  
+                  
+                </div>
               <div className="captionForPost">
                 <Typography id="captionPost">{post.content}</Typography>
               </div>
               <section className="imgPostBox">
                 <img
-                  src={post.channel.image}
-                  //src={"https://img.freepik.com/free-photo/maldives-island_74190-478.jpg?w=996&t=st=1696610601~exp=1696611201~hmac=b604347e0b051b603ab3ebd409486633c249828ee4da57b9e2d786c4d16dcd2e"}
+                  src={
+                    post.images && post.images.length > 0
+                      ? post.images[0]
+                      : "default"
+                  }
                   className="imgPost"
                   alt="Image of post"
                 />

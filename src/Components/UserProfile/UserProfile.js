@@ -122,6 +122,7 @@ function UserProfile() {
                       <hr></hr>
                     </div>
                   </div>
+                  <div className="allInfoUser">
                   <div className="contactUser">
                     <h3 className="h3ContentHeaders">Contact</h3>
                     <p className="pTagIntro">
@@ -163,7 +164,7 @@ function UserProfile() {
                         )}
                     </div>
                   </div>
-
+                  </div>
                   <div>{/* <h3>{userProfile?.workExperience}</h3> */}</div>
                   <div></div>
                 </div>
@@ -186,14 +187,6 @@ function UserProfile() {
                   <Typography>{post.author.name}</Typography>
                   </div>
                   </Link>
-                  {/* <Menu>
-                  <MenuItem/>
-                  </Menu> */}
-                  <div className="moreIcon">
-                  <MoreVertIcon/>
-                  </div>
-                  
-                  
                 </div>
                       <div className="captionForPost">
                         <Typography id="captionPost">{post.content}</Typography>

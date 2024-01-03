@@ -55,7 +55,7 @@ export default function LoginPage() {
         localStorage.setItem("userName",data.data.name);
         if(userMap.has(data.data._id)==false){
          
-        userMap.set(data.data._id,{"name":data.data.name,"photo":"https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/995.jpg"})
+        userMap.set(data.data._id,{"name":data.data.name,"photo":"https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/590.jpg"})
         }
         
         setIsLoggedIn(true);
