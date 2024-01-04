@@ -614,9 +614,9 @@ function HomePage() {
                     >
                     <div className="accountBox">  
                     <div className="dropMyBookings" onClick={closeDropdown}>
-                      <ListItemButton>
+                      {/* <ListItemButton>
                       <p>Edit</p>
-                      </ListItemButton>
+                      </ListItemButton> */}
                     <ListItemButton onClick={()=> handleDeletePost(post._id)}>
                     <p>Delete</p>
                     </ListItemButton>
