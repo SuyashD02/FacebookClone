@@ -6,18 +6,15 @@ import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import SendIcon from "@mui/icons-material/Send";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+
 import EmailIcon from "@mui/icons-material/Email";
 import HomeIcon from "@mui/icons-material/Home";
 import SchoolIcon from "@mui/icons-material/School";
 import { Link } from "react-router-dom";
-import { userMap } from "../Datastoar";
 import { useAuth } from "../Context/Context";
 import { Box } from "@mui/material";
 import "../MyProfile/myProfile.css";
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+
 
 function UserProfile() {
   const { setPostuserId } = useAuth();

@@ -7,9 +7,7 @@ import Main from "../MainPage/Main";
 import Page from "../Page/Page";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import MyProfile from "../MyProfile/MyProfile";
-import DetailPage from "../Page/DetailPage";
 import UpdatePassword from "../UpdatePassword/UpdatePassword";
-import userProfile from "../UserProfile/UserProfile";
 import UserProfile from "../UserProfile/UserProfile";
 import CommingSoon from "../CommingSoon/CommingSoon";
 
@@ -32,7 +30,6 @@ const Router =()=>{
             
             <Route path="/search" element={<SearchComponent />}/>
             <Route path="/createPage" element={<Page />} />
-            <Route path="/createPage/page" element={<DetailPage />}/>
             
             </Route>
         </Routes>

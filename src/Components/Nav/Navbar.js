@@ -18,7 +18,7 @@ import FlagIcon from '@mui/icons-material/Flag';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-import HelpIcon from "@mui/icons-material/Help";
+
 import FeedbackRoundedIcon from "@mui/icons-material/FeedbackRounded";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -29,15 +29,10 @@ import EmojiFlagsRoundedIcon from '@mui/icons-material/EmojiFlagsRounded';
 
 import { useAuth } from "../Context/Context";
 import {
-  BrowserRouter,
   Link,
   NavLink,
-  Route,
-  Routes,
   useNavigate,
 } from "react-router-dom";
-import Divider from "@mui/material/Divider";
-
 import "./nav.css";
 import { userMap } from "../Datastoar";
 
