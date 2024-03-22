@@ -75,6 +75,12 @@ export default function LoginPage() {
 
   return (
     <div className="login">
+      <div className="instructionbar">
+        <div className="child">
+          <h4>This is a React Project of Suyash</h4>
+        </div>
+      </div>
+      <div className="wrapleft-right">
       <div className="left-Content">
         <div className="login-left">
           <div className="loginLeftContent">
@@ -126,6 +132,7 @@ export default function LoginPage() {
           
         </div>
         
+      </div>
       </div>
     </div>
   );
