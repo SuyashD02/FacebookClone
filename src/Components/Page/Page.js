@@ -13,36 +13,7 @@ function Page() {
 
   async function handleCreate() {
     console.log("Function is called");
-    try {
-      const response = await fetch(
-        "https://academics.newtonschool.co/api/v1/user/signup",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization:`Bearer ${bearerToken}`,
-            projectID: "7n1a3lrketcp",
-          },
-          body: JSON.stringify({
-            title: pageName,
-            description: pageBio,
-          }),
-        }
-      );
-      if (response.ok) {
-        console.log("Succecfully SignUp");
-        const data = await response.json();
-        // console.log("CreatePage Data:", data);
-        navigate("//createPage/page")
-
-      } else {
-        const errorData = await response.json();
-        setErrorMessage(errorData.message);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setErrorMessage("An error occurred. Please try again.");
-    }
+    navigate('/commingSoon');
   }
   return (
     <div className="pageContent">

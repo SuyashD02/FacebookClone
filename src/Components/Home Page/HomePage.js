@@ -701,7 +701,7 @@ function HomePage() {
                             <h3>{comment.authorName}</h3>
                             {comment.author === loggedInUserId && (
                               <div className="editCommetSection">
-                                <EditIcon
+                                <span
                                   className="editIconComment"
                                   onClick={() =>
                                     handleEditComment(
@@ -710,13 +710,13 @@ function HomePage() {
                                       comment.content
                                     )
                                   }
-                                ></EditIcon>
-                                <DeleteIcon
+                                >Edit</span>
+                                <span
                                   className="deleteIconComment"
                                   onClick={() =>
                                     deleteCommentForPost(post._id, comment._id)
                                   }
-                                ></DeleteIcon>
+                                >Delete</span>
                               </div>
                             )}
                           </div>

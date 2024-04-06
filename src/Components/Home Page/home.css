@@ -1,6 +1,10 @@
 .homePage{
   background-color: #f0f2f5;
   margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
   
@@ -25,11 +29,9 @@
   }
 
   .searchBox{
-   
-    border: 2px solid black;
     box-shadow: 1px 2px 5px black;
     background-color: white;
-    width: 24em;
+    width: 35em;
     height: 14vh;
     margin-top: 10%;
     border: none;
@@ -62,15 +64,14 @@
     margin-left: 10px;
   }
   .postBox{
-    border: 2px solid black;
+    
     box-shadow: 1px 2px 5px black;
     background-color: white;
-    width: 24em;
+    width: 35em;
     height: 98%;
     margin-top: 10%;
     border: none;
     border-radius: 5px;
-    
   }
   .postSection{
     display: grid;
@@ -100,9 +101,13 @@
     align-items: center;
     margin-left: 5em;
   }
+  .imgPostBox{
+    display: flex;
+    justify-content: center;
+  }
   .imgPost{
     display: grid;
-    width: 24em;
+    width: 100%;
   }
   #divider{
     margin-top: 5px;
@@ -224,10 +229,10 @@
     gap: 15px;
     margin-top: 10px;
     font-weight: normal;
-    
     height: 12vh;
-    border-radius: 5px;
+    border-radius: 20px;
     border: 1px solid #ccc; 
+    background-color: #f0f2f5;
    
   }
   .CommentAuthor{
@@ -243,10 +248,10 @@
     margin-left: 15px;
   }
   .editCommetSection{
-    margin-left: 40%;
+    margin-left: 58%;
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 20px;
   }
   .editCommentDiv{
     margin-left: 10px;
@@ -306,7 +311,7 @@
 .loadMoreBTN{
   display: flex;
   justify-content: center;
-  margin-top: 25px;
+  margin-top: 35px;
   width: 100%;
 }
 .dropdownContent{
@@ -333,8 +338,11 @@
   .searchBox{
     width: 100%;
   }
+  .gridBox{
+    display: none;
+  }
   .postSection{
-    width: 100%;
+    width: 98%;
     margin-top: 15px;
     height:90vh;
     align-items: center;
@@ -355,6 +363,13 @@
   .beforeDisplayImageDiv{
     height: 20vh;
     
+  }
+  .loadMoreBTN{
+    margin-top: 25px;
+   
+  }
+  .editCommetSection{
+    margin-left: 42%;
   }
 }
 

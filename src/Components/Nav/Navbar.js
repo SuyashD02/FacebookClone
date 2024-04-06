@@ -18,7 +18,7 @@ import FlagIcon from '@mui/icons-material/Flag';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-
+import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
 import FeedbackRoundedIcon from "@mui/icons-material/FeedbackRounded";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -41,9 +41,9 @@ import { userMap } from "../Datastoar";
 const Search = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  marginLeft: "2rem",
-  marginRight: "8rem",
-  width: "50%",
+  // marginLeft: "2rem",
+  // marginRight: "8rem",
+  width: "75%",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: "lightgray",
   "&:hover": {
@@ -333,6 +333,7 @@ export default function Navbar({onNavClick}) {
 
                     <div className="modalList">
                       <div className="listItemProfile">
+                      <Link to={"/commingSoon"} className="black-link">
                         <ListItemButton className="listButons">
                           
                           <div className="displayIcon">
@@ -349,6 +350,7 @@ export default function Navbar({onNavClick}) {
                             Settings & privacy
                           </Typography>
                         </ListItemButton>
+                        </Link>
                       </div>
                       <div className="listItemProfile">
                       <Link to={"/createPage"}className="black-link">
@@ -370,16 +372,11 @@ export default function Navbar({onNavClick}) {
                         </Link>
                       </div>
                       <div className="listItemProfile">
-                       
+                      <Link to={"/commingSoon"} className="black-link">
                         <ListItemButton className="listButons">
                           <div className="displayIcon">
                             <div className="iconSetDisplay">
-                            <img 
-                            className="iconDisplay"
-                            src="https://static.xx.fbcdn.net/rsrc.php/v3/yN/r/wZov-fr9UUc.png"
-                            alt="display"
-                            />
-
+                            <NightlightRoundIcon/>
                             </div>
                           </div>
                           <Typography
@@ -391,7 +388,7 @@ export default function Navbar({onNavClick}) {
                             Display & accessibility
                           </Typography>
                         </ListItemButton>
-                        
+                        </Link>
                         
                       </div>
                       <div className="listItemProfile">
