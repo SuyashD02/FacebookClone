@@ -594,7 +594,7 @@ function HomePage() {
                     src={post.author.profileImage}
                   />
 
-                  <Typography>{post.author.name}</Typography>
+                  <p className="namePost">{post.author.name}</p>
                   </div>
                   </Link>
                   {/* <Menu>
@@ -698,7 +698,7 @@ function HomePage() {
                               sx={{ width: 30, height: 30 }}
                               src={userMap.get(comment.author)?.photo}
                             ></Avatar>
-                            <h3>{comment.authorName}</h3>
+                            <h3 className="h3AuthornameComment">{comment.authorName}</h3>
                             {comment.author === loggedInUserId && (
                               <div className="editCommetSection">
                                 <span
