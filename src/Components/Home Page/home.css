@@ -380,7 +380,8 @@
    
   }
   .editCommetSection{
-    margin-left: 42%;
+    margin-left: 40%;
+    gap: 10px;
   }
   .commentData{
     height: 120px;
