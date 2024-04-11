@@ -43,7 +43,7 @@ const Search = styled("div")(({ theme }) => ({
   alignItems: "center",
   // marginLeft: "2rem",
   // marginRight: "8rem",
-  width: "75%",
+  // width: "75%",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: "lightgray",
   "&:hover": {

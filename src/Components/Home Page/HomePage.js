@@ -658,6 +658,7 @@ function HomePage() {
 
               <section className="postButtons">
                 <Button
+                
                   onClick={() => handleLikePost(post._id)}
                   startIcon={<ThumbUpOutlinedIcon />}
                 >
@@ -687,17 +688,20 @@ function HomePage() {
                     <SendIcon />
                   </button>
                 </div>
+                {comments[post._id] && comments[post._id].length > 0 ? (
                 <div className="commentsSection">
                   <div className="commentData">
-                    <h3 id="headingComment">Comment</h3>
                     {comments[post._id] &&
                       comments[post._id].map((comment, index) => (
                         <div key={index} className="comment">
-                          <div className="CommentAuthor">
-                            <Avatar
-                              sx={{ width: 30, height: 30 }}
+                          <div className="avtar">
+                          <Avatar
+                              sx={{ width: 32, height: 32 }}
                               src={userMap.get(comment.author)?.photo}
                             ></Avatar>
+                          </div>
+                          <div className="CommentAuthor">
+                            <div className="divmainName">
                             <h3 className="h3AuthornameComment">{comment.authorName}</h3>
                             {comment.author === loggedInUserId && (
                               <div className="editCommetSection">
@@ -719,9 +723,8 @@ function HomePage() {
                                 >Delete</span>
                               </div>
                             )}
-                          </div>
-
-                          {isEditingComment(comment._id) ? ( // Check if the comment is being edited
+                            </div>
+                             {isEditingComment(comment._id) ? ( // Check if the comment is being edited
                             <div className="editCommentDiv">
                               <input
                                 type="text"
@@ -744,10 +747,14 @@ function HomePage() {
                           ) : (
                             <h3 className="commentH3">{comment.content}</h3>
                           )}
+                          </div>
+
+                         
                         </div>
                       ))}
                   </div>
                 </div>
+                ):null}
               </section>
             </Box>
           ))}

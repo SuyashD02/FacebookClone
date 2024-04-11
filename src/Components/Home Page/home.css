@@ -121,9 +121,11 @@
   #likeDevider{
     margin-top: 10px;
   }
+  
   .postButtons{
     display: flex;
-    justify-content:space-around;
+    justify-content: center;
+    gap: 60%;
   margin-top: 5px;
   }
   .createPostAccount{
@@ -210,41 +212,46 @@
     margin-left: 10px;
     margin-right: 10px;
   }
-  #headingComment{
-    color: gray;
-   
-  }
+ 
   .commentData{
-    
     height: 200px; 
     overflow-y: auto;
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
-    border: 1px solid #ccc; 
-    
   }
   .comment{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 5px;
-    margin-top: 10px;
     font-weight: normal;
-    border-radius: 20px;
-    border: 1px solid #ccc; 
-    background-color: #f0f2f5;
+    
    
   }
-  .CommentAuthor{
+  .divmainName{
     display: flex;
     flex-direction: row;
-    gap: 15px;
-    margin-left: 10px;
-    margin-top: 5px;
+  }
+  .CommentAuthor{
+    width: -webkit-fill-available;
+  background-color: #ebebeb;
+  border-radius: 19px;
+  margin-left: 0px;
+  margin-right: 15px;
+  padding: 10px;
+  margin-bottom: 9px;
+  position: relative;
+  }
+  .avtar{
+    display: flex;
+    align-items: center;
   }
   .commentH3{
     font-size: 16px;
     font-weight: 500;
     margin-left: 15px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
   }
   .editCommetSection{
     margin-left: 58%;
@@ -260,23 +267,24 @@
   .namePost{
     color: #050505;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 16px;
     display: flex;
     align-items: center;
   }
   .h3AuthornameComment{
-    color: #050505;
-    font-weight:500;
-    font-size: 17px;
+    color: gray;
+    font-weight:600;
+    font-size: 16px;
   }
   .editIconComment{
     color: gray;
     cursor: pointer;
+    font-size: 15px;
   }
   .deleteIconComment{
     color: gray;
     cursor: pointer;
-
+    font-size: 15px;
   }
 #inputBoxCommentEdit{
   width: 70%;
@@ -391,6 +399,9 @@
   }
   #captionPost{
     font-size: 16px;
+  }
+  .postButtons{
+    gap: 45%;
   }
 }
 
