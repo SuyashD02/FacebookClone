@@ -48,14 +48,12 @@ export default function LoginPage() {
       if (response.ok) {
         console.log("Successfully logged in");
         const data = await response.json();
-        // console.log(data);
-
+        console.log(data);
         localStorage.setItem("token", data.token);
-        localStorage.setItem("userId", data.data._id);
-        localStorage.setItem("userName",data.data.name);
-        if(userMap.has(data.data._id)==false){
-         
-        userMap.set(data.data._id,{"name":data.data.name,"photo":"https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/590.jpg"})
+        localStorage.setItem("userId", data.data.user._id);
+        localStorage.setItem("userName",data.data.user.name);
+        if(userMap.has(data.data.user._id)==false){ 
+          userMap.set(data.data.user._id,{"name":data.data.user.name,"photo":"https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/590.jpg"})
         }
         
         setIsLoggedIn(true);
